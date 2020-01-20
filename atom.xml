@@ -6,7 +6,7 @@
   <link href="/atom.xml" rel="self"/>
   
   <link href="http://luciusssss.github.io/"/>
-  <updated>2020-01-11T10:41:24.531Z</updated>
+  <updated>2020-01-20T04:56:04.149Z</updated>
   <id>http://luciusssss.github.io/</id>
   
   <author>
@@ -15,6 +15,29 @@
   </author>
   
   <generator uri="https://hexo.io/">Hexo</generator>
+  
+  <entry>
+    <title>LeetCode刷题笔记</title>
+    <link href="http://luciusssss.github.io/2020/01/20/LeetCode%E5%88%B7%E9%A2%98%E7%AC%94%E8%AE%B0/"/>
+    <id>http://luciusssss.github.io/2020/01/20/LeetCode%E5%88%B7%E9%A2%98%E7%AC%94%E8%AE%B0/</id>
+    <published>2020-01-20T04:45:55.000Z</published>
+    <updated>2020-01-20T04:56:04.149Z</updated>
+    
+    <content type="html"><![CDATA[<p>开始刷Top 100 Liked Questions啦！</p><a id="more"></a><h2 id="1-Two-Sum"><a href="#1-Two-Sum" class="headerlink" title="1. Two Sum"></a>1. Two Sum</h2><p>用unordered_map。O(n)</p><h2 id="2-Add-Two-Numbers"><a href="#2-Add-Two-Numbers" class="headerlink" title="2. Add Two Numbers"></a>2. Add Two Numbers</h2><p>同时遍历两个链表</p><h2 id="3-Longest-Substring-Without-Repeating-Characters"><a href="#3-Longest-Substring-Without-Repeating-Characters" class="headerlink" title="3. Longest Substring Without Repeating Characters"></a>3. Longest Substring Without Repeating Characters</h2><p>DP。计算以第i位字符位结尾的满足要求的字符串长度。$O(n^2)$。<br>注意edge case: 长度为0字符串，长度为1字符串之类的。。。</p>]]></content>
+    
+    <summary type="html">
+    
+      &lt;p&gt;开始刷Top 100 Liked Questions啦！&lt;/p&gt;
+    
+    </summary>
+    
+    
+      <category term="算法" scheme="http://luciusssss.github.io/categories/%E7%AE%97%E6%B3%95/"/>
+    
+    
+      <category term="leetcode" scheme="http://luciusssss.github.io/tags/leetcode/"/>
+    
+  </entry>
   
   <entry>
     <title>2019，我读过的论文</title>
