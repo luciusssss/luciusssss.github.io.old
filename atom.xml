@@ -6,7 +6,7 @@
   <link href="/atom.xml" rel="self"/>
   
   <link href="http://luciusssss.github.io/"/>
-  <updated>2020-01-28T12:11:23.599Z</updated>
+  <updated>2020-01-29T02:15:04.299Z</updated>
   <id>http://luciusssss.github.io/</id>
   
   <author>
@@ -21,9 +21,9 @@
     <link href="http://luciusssss.github.io/2020/01/28/LeetCode%E5%88%B7%E9%A2%98%E7%AC%94%E8%AE%B0-2/"/>
     <id>http://luciusssss.github.io/2020/01/28/LeetCode%E5%88%B7%E9%A2%98%E7%AC%94%E8%AE%B0-2/</id>
     <published>2020-01-28T12:10:14.000Z</published>
-    <updated>2020-01-28T12:11:23.599Z</updated>
+    <updated>2020-01-29T02:15:04.299Z</updated>
     
-    <content type="html"><![CDATA[<p>开始刷Top 100 Liked Questions啦！（后50题）</p><a id="more"></a>]]></content>
+    <content type="html"><![CDATA[<p>开始刷Top 100 Liked Questions啦！（后50题）</p><a id="more"></a><h1 id="139-Word-Break"><a href="#139-Word-Break" class="headerlink" title="139. Word Break"></a>139. Word Break</h1><p>方法一：回溯，<strong>一定要加上记忆化</strong>。时间$O(n^2)$，空间$O(n)$。<br>方法二：BFS。对于每个开始的位置，搜索会直到给定字符串的尾部结束。复杂度同上。</p><h1 id="141-Linked-List-Cycle"><a href="#141-Linked-List-Cycle" class="headerlink" title="141. Linked List Cycle"></a>141. Linked List Cycle</h1><p>双指针。时间$O(n)$，空间$O(1)$。</p>]]></content>
     
     <summary type="html">
     
