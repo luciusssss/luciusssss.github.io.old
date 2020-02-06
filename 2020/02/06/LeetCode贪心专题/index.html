@@ -46,28 +46,33 @@
   };
 </script>
 
-  <meta name="description" content="Per aspera ad astra.">
-<meta property="og:type" content="website">
-<meta property="og:title" content="Blog - Lucius">
-<meta property="og:url" content="http://luciusssss.github.io/index.html">
+  <meta name="description" content="392. Is Subsequence判断s是否为t的子序列（不一定要连续，都是字母）。直接贪心，对于s中的每个字符，找到t中的第一次出现就去匹配下一个字符。时间$O(n)$，空间$O(1)$。 12345678bool isSubsequence(string s, string t) &amp;#123;    int i &#x3D; 0, j &#x3D; 0;    while(i &lt; t.size() &amp;a">
+<meta property="og:type" content="article">
+<meta property="og:title" content="LeetCode贪心专题">
+<meta property="og:url" content="http://luciusssss.github.io/2020/02/06/LeetCode%E8%B4%AA%E5%BF%83%E4%B8%93%E9%A2%98/index.html">
 <meta property="og:site_name" content="Blog - Lucius">
-<meta property="og:description" content="Per aspera ad astra.">
+<meta property="og:description" content="392. Is Subsequence判断s是否为t的子序列（不一定要连续，都是字母）。直接贪心，对于s中的每个字符，找到t中的第一次出现就去匹配下一个字符。时间$O(n)$，空间$O(1)$。 12345678bool isSubsequence(string s, string t) &amp;#123;    int i &#x3D; 0, j &#x3D; 0;    while(i &lt; t.size() &amp;a">
+<meta property="article:published_time" content="2020-02-06T05:15:39.000Z">
+<meta property="article:modified_time" content="2020-02-06T13:14:43.028Z">
 <meta property="article:author" content="Lucius">
+<meta property="article:tag" content="LeetCode">
+<meta property="article:tag" content="算法">
+<meta property="article:tag" content="贪心">
 <meta name="twitter:card" content="summary">
 
-<link rel="canonical" href="http://luciusssss.github.io/">
+<link rel="canonical" href="http://luciusssss.github.io/2020/02/06/LeetCode%E8%B4%AA%E5%BF%83%E4%B8%93%E9%A2%98/">
 
 
 <script id="page-configurations">
   // https://hexo.io/docs/variables.html
   CONFIG.page = {
     sidebar: "",
-    isHome: true,
-    isPost: false
+    isHome: false,
+    isPost: true
   };
 </script>
 
-  <title>Blog - Lucius</title>
+  <title>LeetCode贪心专题 | Blog - Lucius</title>
   
 
 
@@ -178,10 +183,10 @@
             
 
   <div class="posts-expand">
-        
+      
   
   
-  <article itemscope itemtype="http://schema.org/Article" class="post-block home" lang="zh-Hans">
+  <article itemscope itemtype="http://schema.org/Article" class="post-block " lang="zh-Hans">
     <link itemprop="mainEntityOfPage" href="http://luciusssss.github.io/2020/02/06/LeetCode%E8%B4%AA%E5%BF%83%E4%B8%93%E9%A2%98/">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
@@ -195,8 +200,7 @@
     </span>
       <header class="post-header">
         <h1 class="post-title" itemprop="name headline">
-          
-            <a href="/2020/02/06/LeetCode%E8%B4%AA%E5%BF%83%E4%B8%93%E9%A2%98/" class="post-title-link" itemprop="url">LeetCode贪心专题</a>
+          LeetCode贪心专题
         </h1>
 
         <div class="post-meta">
@@ -246,7 +250,7 @@
     <div class="post-body" itemprop="articleBody">
 
       
-          <h1 id="392-Is-Subsequence"><a href="#392-Is-Subsequence" class="headerlink" title="392. Is Subsequence"></a>392. Is Subsequence</h1><p>判断<code>s</code>是否为<code>t</code>的子序列（不一定要连续，都是字母）。直接贪心，对于<code>s</code>中的每个字符，找到<code>t</code>中的第一次出现就去匹配下一个字符。时间$O(n)$，空间$O(1)$。</p>
+        <h1 id="392-Is-Subsequence"><a href="#392-Is-Subsequence" class="headerlink" title="392. Is Subsequence"></a>392. Is Subsequence</h1><p>判断<code>s</code>是否为<code>t</code>的子序列（不一定要连续，都是字母）。直接贪心，对于<code>s</code>中的每个字符，找到<code>t</code>中的第一次出现就去匹配下一个字符。时间$O(n)$，空间$O(1)$。</p>
 <figure class="highlight c++"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">bool</span> <span class="title">isSubsequence</span><span class="params">(<span class="built_in">string</span> s, <span class="built_in">string</span> t)</span> </span>&#123;</span><br><span class="line">    <span class="keyword">int</span> i = <span class="number">0</span>, j = <span class="number">0</span>;</span><br><span class="line">    <span class="keyword">while</span>(i &lt; t.<span class="built_in">size</span>() &amp;&amp; j &lt; s.<span class="built_in">size</span>())&#123;</span><br><span class="line">        <span class="keyword">if</span> (t[i] == s[j]) j++;</span><br><span class="line">        i++;</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="keyword">return</span> j == s.<span class="built_in">size</span>();</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
 <p>Follow Up: 如果有大于1B个<code>s</code>要匹配呢？<br>方法一：先存下26个字母中各个字母在<code>t</code>中出现的位置，然后对于<code>t</code>的每个字母，用二分查找<code>t</code>当前位置之后第一次出现这个字母的位置。时间$O(m\log n)$，空间$O(n)$。<br>方法二：预处理直接用一个大二维数组存26个字母在<code>t</code>某一位置之后第一次出现的位置，这样用空间换时间。</p>
 <h1 id="55-Jump-Game"><a href="#55-Jump-Game" class="headerlink" title="55. Jump Game"></a>55. Jump Game</h1><p>转换成区间覆盖，记录当前能跳到最远的距离，如果当前<code>i</code>大于当前最远距离，则返回假，否则就更新最远距离，最后判断最远距离是否包含整个数组。</p>
@@ -270,400 +274,32 @@
 
 <p>题目由yxc大佬挑选，其视频讲解见<a href="https://www.bilibili.com/video/av32864007?t=2836&amp;p=2" target="_blank" rel="noopener">https://www.bilibili.com/video/av32864007?t=2836&amp;p=2</a></p>
 
-      
     </div>
 
     
     
     
+
       <footer class="post-footer">
-        <div class="post-eof"></div>
-      </footer>
-  </article>
-  
-  
-  
+          <div class="post-tags">
+              <a href="/tags/LeetCode/" rel="tag"># LeetCode</a>
+              <a href="/tags/%E7%AE%97%E6%B3%95/" rel="tag"># 算法</a>
+              <a href="/tags/%E8%B4%AA%E5%BF%83/" rel="tag"># 贪心</a>
+          </div>
 
         
-  
-  
-  <article itemscope itemtype="http://schema.org/Article" class="post-block home" lang="zh-Hans">
-    <link itemprop="mainEntityOfPage" href="http://luciusssss.github.io/2020/01/28/LeetCode%E5%88%B7%E9%A2%98%E7%AC%94%E8%AE%B0-2/">
 
-    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
-      <meta itemprop="image" content="/images/avatar.png">
-      <meta itemprop="name" content="Lucius">
-      <meta itemprop="description" content="Per aspera ad astra.">
-    </span>
 
-    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
-      <meta itemprop="name" content="Blog - Lucius">
-    </span>
-      <header class="post-header">
-        <h1 class="post-title" itemprop="name headline">
-          
-            <a href="/2020/01/28/LeetCode%E5%88%B7%E9%A2%98%E7%AC%94%E8%AE%B0-2/" class="post-title-link" itemprop="url">LeetCode刷题笔记 2</a>
-        </h1>
-
-        <div class="post-meta">
-            <span class="post-meta-item">
-              <span class="post-meta-item-icon">
-                <i class="fa fa-calendar-o"></i>
-              </span>
-              <span class="post-meta-item-text">Posted on</span>
-
-              <time title="Created: 2020-01-28 20:10:14" itemprop="dateCreated datePublished" datetime="2020-01-28T20:10:14+08:00">2020-01-28</time>
-            </span>
-              <span class="post-meta-item">
-                <span class="post-meta-item-icon">
-                  <i class="fa fa-calendar-check-o"></i>
-                </span>
-                <span class="post-meta-item-text">Edited on</span>
-                <time title="Modified: 2020-02-03 20:31:29" itemprop="dateModified" datetime="2020-02-03T20:31:29+08:00">2020-02-03</time>
-              </span>
-            <span class="post-meta-item">
-              <span class="post-meta-item-icon">
-                <i class="fa fa-folder-o"></i>
-              </span>
-              <span class="post-meta-item-text">In</span>
-                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
-                  <a href="/categories/%E7%AE%97%E6%B3%95/" itemprop="url" rel="index">
-                    <span itemprop="name">算法</span>
-                  </a>
-                </span>
-            </span>
-
-          
-  
-  <span class="post-meta-item">
-    
-      <span class="post-meta-item-icon">
-        <i class="fa fa-comment-o"></i>
-      </span>
-      <span class="post-meta-item-text">Disqus: </span>
-    
-    <a title="disqus" href="/2020/01/28/LeetCode%E5%88%B7%E9%A2%98%E7%AC%94%E8%AE%B0-2/#comments" itemprop="discussionUrl">
-      <span class="post-comments-count disqus-comment-count" data-disqus-identifier="2020/01/28/LeetCode刷题笔记-2/" itemprop="commentCount"></span>
-    </a>
-  </span>
-  
-  
-
-        </div>
-      </header>
-
-    
-    
-    
-    <div class="post-body" itemprop="articleBody">
-
-      
-          <p>开始刷Top 100 Liked Questions啦！（后50题）</p>
-          <!--noindex-->
-            <div class="post-button">
-              <a class="btn" href="/2020/01/28/LeetCode%E5%88%B7%E9%A2%98%E7%AC%94%E8%AE%B0-2/#more" rel="contents">
-                Read more &raquo;
-              </a>
-            </div>
-          <!--/noindex-->
         
-      
+    <div class="post-nav">
+      <div class="post-nav-item">
+    <a href="/2020/01/28/LeetCode%E5%88%B7%E9%A2%98%E7%AC%94%E8%AE%B0-2/" rel="prev" title="LeetCode刷题笔记 2">
+      <i class="fa fa-chevron-left"></i> LeetCode刷题笔记 2
+    </a></div>
+      <div class="post-nav-item"></div>
     </div>
-
-    
-    
-    
-      <footer class="post-footer">
-        <div class="post-eof"></div>
       </footer>
-  </article>
-  
-  
-  
-
-        
-  
-  
-  <article itemscope itemtype="http://schema.org/Article" class="post-block home" lang="zh-Hans">
-    <link itemprop="mainEntityOfPage" href="http://luciusssss.github.io/2020/01/20/LeetCode%E5%88%B7%E9%A2%98%E7%AC%94%E8%AE%B0-1/">
-
-    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
-      <meta itemprop="image" content="/images/avatar.png">
-      <meta itemprop="name" content="Lucius">
-      <meta itemprop="description" content="Per aspera ad astra.">
-    </span>
-
-    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
-      <meta itemprop="name" content="Blog - Lucius">
-    </span>
-      <header class="post-header">
-        <h1 class="post-title" itemprop="name headline">
-          
-            <a href="/2020/01/20/LeetCode%E5%88%B7%E9%A2%98%E7%AC%94%E8%AE%B0-1/" class="post-title-link" itemprop="url">LeetCode刷题笔记 1</a>
-        </h1>
-
-        <div class="post-meta">
-            <span class="post-meta-item">
-              <span class="post-meta-item-icon">
-                <i class="fa fa-calendar-o"></i>
-              </span>
-              <span class="post-meta-item-text">Posted on</span>
-
-              <time title="Created: 2020-01-20 12:45:55" itemprop="dateCreated datePublished" datetime="2020-01-20T12:45:55+08:00">2020-01-20</time>
-            </span>
-              <span class="post-meta-item">
-                <span class="post-meta-item-icon">
-                  <i class="fa fa-calendar-check-o"></i>
-                </span>
-                <span class="post-meta-item-text">Edited on</span>
-                <time title="Modified: 2020-01-28 20:10:45" itemprop="dateModified" datetime="2020-01-28T20:10:45+08:00">2020-01-28</time>
-              </span>
-            <span class="post-meta-item">
-              <span class="post-meta-item-icon">
-                <i class="fa fa-folder-o"></i>
-              </span>
-              <span class="post-meta-item-text">In</span>
-                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
-                  <a href="/categories/%E7%AE%97%E6%B3%95/" itemprop="url" rel="index">
-                    <span itemprop="name">算法</span>
-                  </a>
-                </span>
-            </span>
-
-          
-  
-  <span class="post-meta-item">
     
-      <span class="post-meta-item-icon">
-        <i class="fa fa-comment-o"></i>
-      </span>
-      <span class="post-meta-item-text">Disqus: </span>
-    
-    <a title="disqus" href="/2020/01/20/LeetCode%E5%88%B7%E9%A2%98%E7%AC%94%E8%AE%B0-1/#comments" itemprop="discussionUrl">
-      <span class="post-comments-count disqus-comment-count" data-disqus-identifier="2020/01/20/LeetCode刷题笔记-1/" itemprop="commentCount"></span>
-    </a>
-  </span>
-  
-  
-
-        </div>
-      </header>
-
-    
-    
-    
-    <div class="post-body" itemprop="articleBody">
-
-      
-          <p>开始刷Top 100 Liked Questions啦！（前50题）</p>
-          <!--noindex-->
-            <div class="post-button">
-              <a class="btn" href="/2020/01/20/LeetCode%E5%88%B7%E9%A2%98%E7%AC%94%E8%AE%B0-1/#more" rel="contents">
-                Read more &raquo;
-              </a>
-            </div>
-          <!--/noindex-->
-        
-      
-    </div>
-
-    
-    
-    
-      <footer class="post-footer">
-        <div class="post-eof"></div>
-      </footer>
-  </article>
-  
-  
-  
-
-        
-  
-  
-  <article itemscope itemtype="http://schema.org/Article" class="post-block home" lang="zh-Hans">
-    <link itemprop="mainEntityOfPage" href="http://luciusssss.github.io/2020/01/11/2019%EF%BC%8C%E6%88%91%E8%AF%BB%E8%BF%87%E7%9A%84%E8%AE%BA%E6%96%87/">
-
-    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
-      <meta itemprop="image" content="/images/avatar.png">
-      <meta itemprop="name" content="Lucius">
-      <meta itemprop="description" content="Per aspera ad astra.">
-    </span>
-
-    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
-      <meta itemprop="name" content="Blog - Lucius">
-    </span>
-      <header class="post-header">
-        <h1 class="post-title" itemprop="name headline">
-          
-            <a href="/2020/01/11/2019%EF%BC%8C%E6%88%91%E8%AF%BB%E8%BF%87%E7%9A%84%E8%AE%BA%E6%96%87/" class="post-title-link" itemprop="url">2019，我读过的论文</a>
-        </h1>
-
-        <div class="post-meta">
-            <span class="post-meta-item">
-              <span class="post-meta-item-icon">
-                <i class="fa fa-calendar-o"></i>
-              </span>
-              <span class="post-meta-item-text">Posted on</span>
-
-              <time title="Created: 2020-01-11 15:00:13" itemprop="dateCreated datePublished" datetime="2020-01-11T15:00:13+08:00">2020-01-11</time>
-            </span>
-              <span class="post-meta-item">
-                <span class="post-meta-item-icon">
-                  <i class="fa fa-calendar-check-o"></i>
-                </span>
-                <span class="post-meta-item-text">Edited on</span>
-                <time title="Modified: 2020-01-21 18:40:44" itemprop="dateModified" datetime="2020-01-21T18:40:44+08:00">2020-01-21</time>
-              </span>
-            <span class="post-meta-item">
-              <span class="post-meta-item-icon">
-                <i class="fa fa-folder-o"></i>
-              </span>
-              <span class="post-meta-item-text">In</span>
-                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
-                  <a href="/categories/%E8%AE%BA%E6%96%87/" itemprop="url" rel="index">
-                    <span itemprop="name">论文</span>
-                  </a>
-                </span>
-            </span>
-
-          
-  
-  <span class="post-meta-item">
-    
-      <span class="post-meta-item-icon">
-        <i class="fa fa-comment-o"></i>
-      </span>
-      <span class="post-meta-item-text">Disqus: </span>
-    
-    <a title="disqus" href="/2020/01/11/2019%EF%BC%8C%E6%88%91%E8%AF%BB%E8%BF%87%E7%9A%84%E8%AE%BA%E6%96%87/#comments" itemprop="discussionUrl">
-      <span class="post-comments-count disqus-comment-count" data-disqus-identifier="2020/01/11/2019，我读过的论文/" itemprop="commentCount"></span>
-    </a>
-  </span>
-  
-  
-
-        </div>
-      </header>
-
-    
-    
-    
-    <div class="post-body" itemprop="articleBody">
-
-      
-          <p>去年开始认真读论文还是从7月开始，主要读了很多Question Answering的论文，其中又以Machine Reading Comprehension为主，大概了解了QA这个领域在做些什么。<br>这里我把去年读过的论文简单列一下。其中我觉得值得一读的论文我会打上😻。<br>阅读过程中尤其感谢LAI Yuxuan师兄的指导！</p>
-<h2 id="Survey"><a href="#Survey" class="headerlink" title="Survey"></a>Survey</h2><ul>
-<li><p>NEURAL READING COMPREHENSION AND BEYOND 😻<br><em>Chen Danqi</em><br>陈丹琦的博士毕业论文，一篇对MRC比较全面且易懂的综述。</p>
-</li>
-<li><p>Neural Machine Reading Comprehension: Methods and Trends<br><em>Shanshan Liu, Xin Zhang, Sheng Zhang, Hui Wang, Weiming Zhang</em><br>国防科大的MRC综述，一些想法很大胆，但一些地方没有讲明白。</p>
-</li>
-<li><p>Recent Advances in Natural Language Inference: A Survey of Benchmarks, Resources, and Approaches 😻<br><em>Shane Storks, Qiaozi Gao, Joyce Y. Chai</em><br>对于（广义的）Commonsense QA做的综述。</p>
-</li>
-</ul>
-          <!--noindex-->
-            <div class="post-button">
-              <a class="btn" href="/2020/01/11/2019%EF%BC%8C%E6%88%91%E8%AF%BB%E8%BF%87%E7%9A%84%E8%AE%BA%E6%96%87/#more" rel="contents">
-                Read more &raquo;
-              </a>
-            </div>
-          <!--/noindex-->
-        
-      
-    </div>
-
-    
-    
-    
-      <footer class="post-footer">
-        <div class="post-eof"></div>
-      </footer>
-  </article>
-  
-  
-  
-
-        
-  
-  
-  <article itemscope itemtype="http://schema.org/Article" class="post-block home" lang="zh-Hans">
-    <link itemprop="mainEntityOfPage" href="http://luciusssss.github.io/2020/01/11/hello-world/">
-
-    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
-      <meta itemprop="image" content="/images/avatar.png">
-      <meta itemprop="name" content="Lucius">
-      <meta itemprop="description" content="Per aspera ad astra.">
-    </span>
-
-    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
-      <meta itemprop="name" content="Blog - Lucius">
-    </span>
-      <header class="post-header">
-        <h1 class="post-title" itemprop="name headline">
-          
-            <a href="/2020/01/11/hello-world/" class="post-title-link" itemprop="url">Hello World</a>
-        </h1>
-
-        <div class="post-meta">
-            <span class="post-meta-item">
-              <span class="post-meta-item-icon">
-                <i class="fa fa-calendar-o"></i>
-              </span>
-              <span class="post-meta-item-text">Posted on</span>
-              
-
-              <time title="Created: 2020-01-11 13:30:39 / Modified: 18:38:54" itemprop="dateCreated datePublished" datetime="2020-01-11T13:30:39+08:00">2020-01-11</time>
-            </span>
-
-          
-  
-  <span class="post-meta-item">
-    
-      <span class="post-meta-item-icon">
-        <i class="fa fa-comment-o"></i>
-      </span>
-      <span class="post-meta-item-text">Disqus: </span>
-    
-    <a title="disqus" href="/2020/01/11/hello-world/#comments" itemprop="discussionUrl">
-      <span class="post-comments-count disqus-comment-count" data-disqus-identifier="2020/01/11/hello-world/" itemprop="commentCount"></span>
-    </a>
-  </span>
-  
-  
-
-        </div>
-      </header>
-
-    
-    
-    
-    <div class="post-body" itemprop="articleBody">
-
-      
-          <!-- Welcome to [Hexo](https://hexo.io/)! This is your very first post. Check [documentation](https://hexo.io/docs/) for more info. If you get any problems when using Hexo, you can find the answer in [troubleshooting](https://hexo.io/docs/troubleshooting.html) or you can ask me on [GitHub](https://github.com/hexojs/hexo/issues). -->
-
-<h2 id="Quick-Start"><a href="#Quick-Start" class="headerlink" title="Quick Start"></a>Quick Start</h2><h3 id="Create-a-new-post"><a href="#Create-a-new-post" class="headerlink" title="Create a new post"></a>Create a new post</h3><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">$ hexo new <span class="string">"My New Post"</span></span><br></pre></td></tr></table></figure>
-
-<p>More info: <a href="https://hexo.io/docs/writing.html" target="_blank" rel="noopener">Writing</a></p>
-<h3 id="Run-server"><a href="#Run-server" class="headerlink" title="Run server"></a>Run server</h3><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">$ hexo server</span><br></pre></td></tr></table></figure>
-
-<p>More info: <a href="https://hexo.io/docs/server.html" target="_blank" rel="noopener">Server</a></p>
-<h3 id="Generate-static-files"><a href="#Generate-static-files" class="headerlink" title="Generate static files"></a>Generate static files</h3><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">$ hexo generate</span><br></pre></td></tr></table></figure>
-
-<p>More info: <a href="https://hexo.io/docs/generating.html" target="_blank" rel="noopener">Generating</a></p>
-<h3 id="Deploy-to-remote-sites"><a href="#Deploy-to-remote-sites" class="headerlink" title="Deploy to remote sites"></a>Deploy to remote sites</h3><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">$ hexo deploy</span><br></pre></td></tr></table></figure>
-
-<p>More info: <a href="https://hexo.io/docs/one-command-deployment.html" target="_blank" rel="noopener">Deployment</a></p>
-
-      
-    </div>
-
-    
-    
-    
-      <footer class="post-footer">
-        <div class="post-eof"></div>
-      </footer>
   </article>
   
   
@@ -671,12 +307,16 @@
 
   </div>
 
-  
-
-
 
           </div>
           
+    
+  <div class="comments">
+    <div id="disqus_thread">
+      <noscript>Please enable JavaScript to view the comments powered by Disqus.</noscript>
+    </div>
+  </div>
+  
 
 <script>
   window.addEventListener('tabs:register', () => {
@@ -723,6 +363,7 @@
 
       <!--noindex-->
       <div class="post-toc-wrap sidebar-panel">
+          <div class="post-toc motion-element"><ol class="nav"><li class="nav-item nav-level-1"><a class="nav-link" href="#392-Is-Subsequence"><span class="nav-number">1.</span> <span class="nav-text">392. Is Subsequence</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#55-Jump-Game"><span class="nav-number">2.</span> <span class="nav-text">55. Jump Game</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#45-Jump-Game-II"><span class="nav-number">3.</span> <span class="nav-text">45. Jump Game II</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#376-Wiggle-Subsequence"><span class="nav-number">4.</span> <span class="nav-text">376. Wiggle Subsequence</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#452-Minimum-Number-of-Arrows-to-Burst-Balloons"><span class="nav-number">5.</span> <span class="nav-text">452. Minimum Number of Arrows to Burst Balloons</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#406-Queue-Reconstruction-by-Height"><span class="nav-number">6.</span> <span class="nav-text">406. Queue Reconstruction by Height</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#402-Remove-K-Digits"><span class="nav-number">7.</span> <span class="nav-text">402. Remove K Digits</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#134-Gas-Station"><span class="nav-number">8.</span> <span class="nav-text">134. Gas Station</span></a></li></ol></div>
       </div>
       <!--/noindex-->
 
@@ -906,6 +547,26 @@
   }
   // defer loading until the whole page loading is completed
   window.addEventListener('load', loadCount, false);
+</script>
+<script>
+  NexT.utils.loadComments(document.querySelector('#disqus_thread'), () => {
+    if (window.DISQUS) {
+      DISQUS.reset({
+        reload: true,
+        config: {page: {
+            url: "http://luciusssss.github.io/2020/02/06/LeetCode%E8%B4%AA%E5%BF%83%E4%B8%93%E9%A2%98/",
+            identifier: "2020/02/06/LeetCode贪心专题/",
+            title: "LeetCode贪心专题"
+          }
+        }
+      });
+    } else {
+      var d = document, s = d.createElement('script');
+      s.src = 'https://Lucius.disqus.com/embed.js';
+      s.setAttribute('data-timestamp', '' + +new Date());
+      (d.head || d.body).appendChild(s);
+    }
+  });
 </script><!-- hexo-inject:begin --><!-- hexo-inject:end -->
 
 </body>
