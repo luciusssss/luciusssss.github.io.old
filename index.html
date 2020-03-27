@@ -205,8 +205,20 @@
                 <i class="fa fa-calendar-o"></i>
               </span>
               <span class="post-meta-item-text">Posted on</span>
+              
 
-              <time title="Created: 2020-03-27 15:43:22" itemprop="dateCreated datePublished" datetime="2020-03-27T15:43:22+08:00">2020-03-27</time>
+              <time title="Created: 2020-03-27 15:43:22 / Modified: 19:16:00" itemprop="dateCreated datePublished" datetime="2020-03-27T15:43:22+08:00">2020-03-27</time>
+            </span>
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="fa fa-folder-o"></i>
+              </span>
+              <span class="post-meta-item-text">In</span>
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/%E6%9C%BA%E5%99%A8%E5%AD%A6%E4%B9%A0/" itemprop="url" rel="index">
+                    <span itemprop="name">机器学习</span>
+                  </a>
+                </span>
             </span>
 
           
@@ -234,7 +246,53 @@
     <div class="post-body" itemprop="articleBody">
 
       
-          
+          <p>从模型-&gt;策略-&gt;算法的思路来描述感知机！</p>
+<h1 id="感知机模型"><a href="#感知机模型" class="headerlink" title="感知机模型"></a>感知机模型</h1><p>输入空间为$\mathcal{X} \subseteq \mathbb{R}^{n}$，输出空间为$\mathcal{Y} = {+1, -1}$，从输入空间到输出空间的函数$f(x) = \mathrm{sign}(w\cdot x + b)$称为感知机。$w\cdot x + b = 0$对应特征空间$ \mathbb{R}^{n}$内的一个超平面，将特征空间分成两部分。</p>
+<h1 id="感知机学习策略"><a href="#感知机学习策略" class="headerlink" title="感知机学习策略"></a>感知机学习策略</h1><p>假设数据集是线性可分的，感知机的学习目标是是找到一个能将正负例完全区分开的超平面。</p>
+<p>对于损失函数，一个naive的想法是误分类点的总数，但是这个函数对于模型参数$w,b$不可导，不易优化。另一个想法是误分类点到超平面距离之和$\sum_{x_i\in M}\frac{1}{|w|}|w\cdot x_i + b|$。因为对于误分类点有$y(w\cdot x + b) &lt; 0$，所以可以把绝对值拆掉，同时省掉$w$的$L_2$范数，得到最终的损失函数为<br>$$<br>L(w, b) = - \sum_{x_i \in M} y_i(w\cdot x_i + b)<br>$$<br>其中$M$为误分类的点集。误分类点越少，误分类点离超平面越近，损失函数值越小。</p>
+<h1 id="感知机学习算法"><a href="#感知机学习算法" class="headerlink" title="感知机学习算法"></a>感知机学习算法</h1><h2 id="原始形式"><a href="#原始形式" class="headerlink" title="原始形式"></a>原始形式</h2><p>感知机算法是误分类驱动的，可以采用随机梯度下降进行参数更新。</p>
+<p>假设误分类点集$M$是固定的，损失函数的梯度为<br>$$<br>\nabla_{w} L(w, b) = -\sum_{x_i \in M} y_i\cdot x_i<br>$$</p>
+<p>$$<br>\nabla_b L(w, b) = -\sum_{x_i \in M} y_i<br>$$</p>
+<p>随机选取一个误分类点对参数进行更新<br>$$<br>w \gets w + \eta y_ix_i<br>$$</p>
+<p>$$<br>b \gets b + \eta y_i<br>$$</p>
+<p>其中$\eta$为学习率。</p>
+<p>直观上看，当一个实例点被误分类，就调增超平面朝该误分类点的一侧移动。</p>
+<p>对于参数的不同初值和不同误分类点的选取可能会得出不同的解。</p>
+<h2 id="收敛性"><a href="#收敛性" class="headerlink" title="收敛性"></a>收敛性</h2><p>（以下分析把参数$b$合并到$w$中，同时特征向量里添加一个1）</p>
+<p>由于训练集是线性可分的，所以存在一个超平面$w_{opt}$满足$|w_{opt}| = 1$能将数据集完全分开。取$\gamma = \min_{i} y_i(w_{opt}\cdot x_i)$，则有对所有$i = 1, \dots, N$，有$y_i(w_{opt}\cdot x_i) \geq \gamma$。</p>
+<p>令$R = \max_{i}|x_i|$，$w_0 = 0$。若$(x_i, y_i)$为第$k$个被误分类的数据，梯度更新得到$w_k = w_{k-1} + \eta y_i x_i$。</p>
+<p>一方面，$w_k \cdot w_{opt} = (w_{k-1} + \eta y_i x_i)w_{opt} \geq w_{k-1}w_{opt} + \eta \gamma \geq \dots \geq k\eta \gamma$。</p>
+<p> 另一方面有，$|w_{k}|^{2} = |w_{k-1}|^{2} + 2\eta y_i w_{k-1}\cdot x_i + \eta^2|x_i|^2 \leq |w_{k-1}|^{2} + \eta^2 R^2 \leq \dots \leq k\eta^2R^2$ 。</p>
+<p>所以有<br>$$<br>k\eta \gamma\leq w_k \cdot w_{opt} \leq |w_{k}||w_{opt}| \leq \sqrt{k} \eta R<br>$$<br>从而得到<br>$$<br>k \leq (\frac{R}{\gamma})^2<br>$$<br>感知机算法的原始形式迭代是收敛的！</p>
+<h2 id="对偶形式"><a href="#对偶形式" class="headerlink" title="对偶形式"></a>对偶形式</h2><p>基本想法是将$w,b$表示为$x_i, y_i$线性组合的形式（这也是SVM的基本思想）。</p>
+<p>不妨将$w,b$初始设为0。对于误分类点$(x_i, y_i)$通过梯度更新$n_i$次，相当于对$w$加了$n_i$次$\eta y_i x_i$，对$b$加了$n_i$次$\eta y_i$。l令$\alpha_i = n_i\eta$这样最后学到的$w,b$可以表示成<br>$$<br>w = \sum_{i=1}^{N} \alpha_i y_i x_i<br>$$</p>
+<p>$$<br>b = \sum_{i=0}^{N}\alpha_i y_i<br>$$</p>
+<p>当$\eta = 1$时，$\alpha_i$相当于这个实例点因为误分类而更新的次数。</p>
+<p>在对偶形式的算法中，如果$y_i(\sum_{j=1}^{N} \alpha_j y_j x_j \cdot x_i + b) \leq 0$，则进行如下更新<br>$$<br>a_i \gets a_i + \eta<br>$$</p>
+<p>$$<br>b \gets b + \eta y_i<br>$$</p>
+<p>训练实例仅以内积出现，所以可以预先计算出所有内积储存为矩阵，也就是Gram矩阵<br>$$<br>\mathbf{G} = [x_i \cdot x_j]_{N\times N}<br>$$</p>
+<h1 id="习题"><a href="#习题" class="headerlink" title="习题"></a>习题</h1><ol>
+<li><p>验证感知机为什么不能表示异或。</p>
+<p>对于两个元素的异或，有四种情况$(1, 1) \to 0$, $(1, 0) \to 1$，$(0,1)\to 1$，$(0, 0) \to 0$。而这四个点放到平面上，不是线性可分的。</p>
+</li>
+<li><p>构建从数据集求解感知机模型的例子。</p>
+<p>例2.1 Python实现</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">def</span> <span class="title">InnerProduct</span><span class="params">(a, b)</span>:</span></span><br><span class="line">    res = <span class="number">0</span></span><br><span class="line">    <span class="keyword">for</span> i, j <span class="keyword">in</span> zip(a, b):</span><br><span class="line">        res += i*j</span><br><span class="line">    <span class="keyword">return</span> res</span><br><span class="line"></span><br><span class="line">X = [[<span class="number">3</span>, <span class="number">3</span>], [<span class="number">4</span>, <span class="number">3</span>], [<span class="number">1</span>, <span class="number">1</span>]]</span><br><span class="line">Y = [<span class="number">1</span>, <span class="number">1</span>, <span class="number">-1</span>]</span><br><span class="line"></span><br><span class="line">iteration = <span class="number">10</span></span><br><span class="line">eta = <span class="number">1</span></span><br><span class="line"></span><br><span class="line">w = [<span class="number">0</span>, <span class="number">0</span>]</span><br><span class="line">b = <span class="number">0</span></span><br><span class="line"></span><br><span class="line"><span class="keyword">for</span> it <span class="keyword">in</span> range(iteration):</span><br><span class="line">    <span class="keyword">for</span> x, y <span class="keyword">in</span> zip(X, Y):</span><br><span class="line">        <span class="keyword">if</span> y * (InnerProduct(w, x) + b) &lt;= <span class="number">0</span>:</span><br><span class="line">            <span class="keyword">for</span> k <span class="keyword">in</span> range(len(w)):</span><br><span class="line">                w[k] += eta * y * x[k]</span><br><span class="line">            b += eta * y</span><br><span class="line"></span><br><span class="line">all_seperated = <span class="literal">True</span></span><br><span class="line"><span class="keyword">for</span> x, y <span class="keyword">in</span> zip(X, Y):</span><br><span class="line">    <span class="keyword">if</span> y * (InnerProduct(w, x) + b) &lt;= <span class="number">0</span>:</span><br><span class="line">        all_seperated = <span class="literal">False</span></span><br><span class="line">        <span class="keyword">break</span></span><br><span class="line"></span><br><span class="line"><span class="keyword">if</span> all_seperated:</span><br><span class="line">    print(<span class="string">'Hyperplane found!'</span>)</span><br><span class="line">    print(<span class="string">'w:'</span>, w, <span class="string">"b:"</span>, b)</span><br><span class="line"><span class="keyword">else</span>:</span><br><span class="line">    print(<span class="string">'Hyperplane not found...'</span>)</span><br></pre></td></tr></table></figure>
+
+
+
+</li>
+</ol>
+<ol start="3">
+<li><p>证明：样本集线性可分的充要条件是正实例点集构成的凸壳和负实例点集构成的凸壳互不相交。定义$S = {x_1, \dots, x_k}$的凸壳$\mathrm{conv}(S) = {x = \sum_{i=1}^{k}\lambda_ix_i \mid \sum_{i =1}^{k}\lambda_i = 1, \lambda_i \geq 0, i = 1, \dots, k}$</p>
+<p>设正例有$x_{p_1},  \dots, x_{p_k}$，负例有 $x_{q_1},  \dots, x_{q_m}$</p>
+<p>($\Rightarrow$)</p>
+<p>反证：假设正负点集的凸壳相交，即存在点$x_t$满足$x_t = \sum_{i = p_1}^{p_k} \lambda_i x_i = \sum_{j = q_1}^{q_m} \lambda_j x_j$。因为样本集线性可分，所以存在$w, b$使得对所有正例有$w\cdot x + b &gt; 0$，所有负例有$w \cdot x + b &lt; 0$。从而有$\sum_{i = p_1}^{p_k}\lambda_i (w \cdot x_i + b) = w \cdot x_t + b &gt; 0$。同理有$w\cdot x_t + b &lt; 0$ ，矛盾！</p>
+<p>($\Leftarrow$)</p>
+<p>直观上，凸壳不交则凸壳线性可分，从而正负点集线性可分。严谨的证明见<a href="https://blog.csdn.net/y954877035/article/details/52210734" target="_blank" rel="noopener">https://blog.csdn.net/y954877035/article/details/52210734</a></p>
+</li>
+</ol>
+
       
     </div>
 
@@ -703,12 +761,394 @@
   
   
 
+        
+  
+  
+  <article itemscope itemtype="http://schema.org/Article" class="post-block home" lang="zh-Hans">
+    <link itemprop="mainEntityOfPage" href="http://luciusssss.github.io/2020/01/28/LeetCode%E5%88%B7%E9%A2%98%E7%AC%94%E8%AE%B0-2/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="image" content="/images/avatar.png">
+      <meta itemprop="name" content="Lucius">
+      <meta itemprop="description" content="Per aspera ad astra.">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="Blog - Lucius">
+    </span>
+      <header class="post-header">
+        <h1 class="post-title" itemprop="name headline">
+          
+            <a href="/2020/01/28/LeetCode%E5%88%B7%E9%A2%98%E7%AC%94%E8%AE%B0-2/" class="post-title-link" itemprop="url">LeetCode刷题笔记 2</a>
+        </h1>
+
+        <div class="post-meta">
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              <span class="post-meta-item-text">Posted on</span>
+
+              <time title="Created: 2020-01-28 20:10:14" itemprop="dateCreated datePublished" datetime="2020-01-28T20:10:14+08:00">2020-01-28</time>
+            </span>
+              <span class="post-meta-item">
+                <span class="post-meta-item-icon">
+                  <i class="fa fa-calendar-check-o"></i>
+                </span>
+                <span class="post-meta-item-text">Edited on</span>
+                <time title="Modified: 2020-02-03 20:31:29" itemprop="dateModified" datetime="2020-02-03T20:31:29+08:00">2020-02-03</time>
+              </span>
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="fa fa-folder-o"></i>
+              </span>
+              <span class="post-meta-item-text">In</span>
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/%E7%AE%97%E6%B3%95/" itemprop="url" rel="index">
+                    <span itemprop="name">算法</span>
+                  </a>
+                </span>
+            </span>
+
+          
+  
+  <span class="post-meta-item">
+    
+      <span class="post-meta-item-icon">
+        <i class="fa fa-comment-o"></i>
+      </span>
+      <span class="post-meta-item-text">Disqus: </span>
+    
+    <a title="disqus" href="/2020/01/28/LeetCode%E5%88%B7%E9%A2%98%E7%AC%94%E8%AE%B0-2/#comments" itemprop="discussionUrl">
+      <span class="post-comments-count disqus-comment-count" data-disqus-identifier="2020/01/28/LeetCode刷题笔记-2/" itemprop="commentCount"></span>
+    </a>
+  </span>
+  
+  
+
+        </div>
+      </header>
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+          <p>开始刷Top 100 Liked Questions啦！（后50题）</p>
+          <!--noindex-->
+            <div class="post-button">
+              <a class="btn" href="/2020/01/28/LeetCode%E5%88%B7%E9%A2%98%E7%AC%94%E8%AE%B0-2/#more" rel="contents">
+                Read more &raquo;
+              </a>
+            </div>
+          <!--/noindex-->
+        
+      
+    </div>
+
+    
+    
+    
+      <footer class="post-footer">
+        <div class="post-eof"></div>
+      </footer>
+  </article>
+  
+  
+  
+
+        
+  
+  
+  <article itemscope itemtype="http://schema.org/Article" class="post-block home" lang="zh-Hans">
+    <link itemprop="mainEntityOfPage" href="http://luciusssss.github.io/2020/01/20/LeetCode%E5%88%B7%E9%A2%98%E7%AC%94%E8%AE%B0-1/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="image" content="/images/avatar.png">
+      <meta itemprop="name" content="Lucius">
+      <meta itemprop="description" content="Per aspera ad astra.">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="Blog - Lucius">
+    </span>
+      <header class="post-header">
+        <h1 class="post-title" itemprop="name headline">
+          
+            <a href="/2020/01/20/LeetCode%E5%88%B7%E9%A2%98%E7%AC%94%E8%AE%B0-1/" class="post-title-link" itemprop="url">LeetCode刷题笔记 1</a>
+        </h1>
+
+        <div class="post-meta">
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              <span class="post-meta-item-text">Posted on</span>
+
+              <time title="Created: 2020-01-20 12:45:55" itemprop="dateCreated datePublished" datetime="2020-01-20T12:45:55+08:00">2020-01-20</time>
+            </span>
+              <span class="post-meta-item">
+                <span class="post-meta-item-icon">
+                  <i class="fa fa-calendar-check-o"></i>
+                </span>
+                <span class="post-meta-item-text">Edited on</span>
+                <time title="Modified: 2020-01-28 20:10:45" itemprop="dateModified" datetime="2020-01-28T20:10:45+08:00">2020-01-28</time>
+              </span>
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="fa fa-folder-o"></i>
+              </span>
+              <span class="post-meta-item-text">In</span>
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/%E7%AE%97%E6%B3%95/" itemprop="url" rel="index">
+                    <span itemprop="name">算法</span>
+                  </a>
+                </span>
+            </span>
+
+          
+  
+  <span class="post-meta-item">
+    
+      <span class="post-meta-item-icon">
+        <i class="fa fa-comment-o"></i>
+      </span>
+      <span class="post-meta-item-text">Disqus: </span>
+    
+    <a title="disqus" href="/2020/01/20/LeetCode%E5%88%B7%E9%A2%98%E7%AC%94%E8%AE%B0-1/#comments" itemprop="discussionUrl">
+      <span class="post-comments-count disqus-comment-count" data-disqus-identifier="2020/01/20/LeetCode刷题笔记-1/" itemprop="commentCount"></span>
+    </a>
+  </span>
+  
+  
+
+        </div>
+      </header>
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+          <p>开始刷Top 100 Liked Questions啦！（前50题）</p>
+          <!--noindex-->
+            <div class="post-button">
+              <a class="btn" href="/2020/01/20/LeetCode%E5%88%B7%E9%A2%98%E7%AC%94%E8%AE%B0-1/#more" rel="contents">
+                Read more &raquo;
+              </a>
+            </div>
+          <!--/noindex-->
+        
+      
+    </div>
+
+    
+    
+    
+      <footer class="post-footer">
+        <div class="post-eof"></div>
+      </footer>
+  </article>
+  
+  
+  
+
+        
+  
+  
+  <article itemscope itemtype="http://schema.org/Article" class="post-block home" lang="zh-Hans">
+    <link itemprop="mainEntityOfPage" href="http://luciusssss.github.io/2020/01/11/2019%EF%BC%8C%E6%88%91%E8%AF%BB%E8%BF%87%E7%9A%84%E8%AE%BA%E6%96%87/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="image" content="/images/avatar.png">
+      <meta itemprop="name" content="Lucius">
+      <meta itemprop="description" content="Per aspera ad astra.">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="Blog - Lucius">
+    </span>
+      <header class="post-header">
+        <h1 class="post-title" itemprop="name headline">
+          
+            <a href="/2020/01/11/2019%EF%BC%8C%E6%88%91%E8%AF%BB%E8%BF%87%E7%9A%84%E8%AE%BA%E6%96%87/" class="post-title-link" itemprop="url">2019，我读过的论文</a>
+        </h1>
+
+        <div class="post-meta">
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              <span class="post-meta-item-text">Posted on</span>
+
+              <time title="Created: 2020-01-11 15:00:13" itemprop="dateCreated datePublished" datetime="2020-01-11T15:00:13+08:00">2020-01-11</time>
+            </span>
+              <span class="post-meta-item">
+                <span class="post-meta-item-icon">
+                  <i class="fa fa-calendar-check-o"></i>
+                </span>
+                <span class="post-meta-item-text">Edited on</span>
+                <time title="Modified: 2020-01-21 18:40:44" itemprop="dateModified" datetime="2020-01-21T18:40:44+08:00">2020-01-21</time>
+              </span>
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="fa fa-folder-o"></i>
+              </span>
+              <span class="post-meta-item-text">In</span>
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/%E8%AE%BA%E6%96%87/" itemprop="url" rel="index">
+                    <span itemprop="name">论文</span>
+                  </a>
+                </span>
+            </span>
+
+          
+  
+  <span class="post-meta-item">
+    
+      <span class="post-meta-item-icon">
+        <i class="fa fa-comment-o"></i>
+      </span>
+      <span class="post-meta-item-text">Disqus: </span>
+    
+    <a title="disqus" href="/2020/01/11/2019%EF%BC%8C%E6%88%91%E8%AF%BB%E8%BF%87%E7%9A%84%E8%AE%BA%E6%96%87/#comments" itemprop="discussionUrl">
+      <span class="post-comments-count disqus-comment-count" data-disqus-identifier="2020/01/11/2019，我读过的论文/" itemprop="commentCount"></span>
+    </a>
+  </span>
+  
+  
+
+        </div>
+      </header>
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+          <p>去年开始认真读论文还是从7月开始，主要读了很多Question Answering的论文，其中又以Machine Reading Comprehension为主，大概了解了QA这个领域在做些什么。<br>这里我把去年读过的论文简单列一下。其中我觉得值得一读的论文我会打上😻。<br>阅读过程中尤其感谢LAI Yuxuan师兄的指导！</p>
+<h2 id="Survey"><a href="#Survey" class="headerlink" title="Survey"></a>Survey</h2><ul>
+<li><p>NEURAL READING COMPREHENSION AND BEYOND 😻<br><em>Chen Danqi</em><br>陈丹琦的博士毕业论文，一篇对MRC比较全面且易懂的综述。</p>
+</li>
+<li><p>Neural Machine Reading Comprehension: Methods and Trends<br><em>Shanshan Liu, Xin Zhang, Sheng Zhang, Hui Wang, Weiming Zhang</em><br>国防科大的MRC综述，一些想法很大胆，但一些地方没有讲明白。</p>
+</li>
+<li><p>Recent Advances in Natural Language Inference: A Survey of Benchmarks, Resources, and Approaches 😻<br><em>Shane Storks, Qiaozi Gao, Joyce Y. Chai</em><br>对于（广义的）Commonsense QA做的综述。</p>
+</li>
+</ul>
+          <!--noindex-->
+            <div class="post-button">
+              <a class="btn" href="/2020/01/11/2019%EF%BC%8C%E6%88%91%E8%AF%BB%E8%BF%87%E7%9A%84%E8%AE%BA%E6%96%87/#more" rel="contents">
+                Read more &raquo;
+              </a>
+            </div>
+          <!--/noindex-->
+        
+      
+    </div>
+
+    
+    
+    
+      <footer class="post-footer">
+        <div class="post-eof"></div>
+      </footer>
+  </article>
+  
+  
+  
+
+        
+  
+  
+  <article itemscope itemtype="http://schema.org/Article" class="post-block home" lang="zh-Hans">
+    <link itemprop="mainEntityOfPage" href="http://luciusssss.github.io/2020/01/11/hello-world/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="image" content="/images/avatar.png">
+      <meta itemprop="name" content="Lucius">
+      <meta itemprop="description" content="Per aspera ad astra.">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="Blog - Lucius">
+    </span>
+      <header class="post-header">
+        <h1 class="post-title" itemprop="name headline">
+          
+            <a href="/2020/01/11/hello-world/" class="post-title-link" itemprop="url">Hello World</a>
+        </h1>
+
+        <div class="post-meta">
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              <span class="post-meta-item-text">Posted on</span>
+              
+
+              <time title="Created: 2020-01-11 13:30:39 / Modified: 18:38:54" itemprop="dateCreated datePublished" datetime="2020-01-11T13:30:39+08:00">2020-01-11</time>
+            </span>
+
+          
+  
+  <span class="post-meta-item">
+    
+      <span class="post-meta-item-icon">
+        <i class="fa fa-comment-o"></i>
+      </span>
+      <span class="post-meta-item-text">Disqus: </span>
+    
+    <a title="disqus" href="/2020/01/11/hello-world/#comments" itemprop="discussionUrl">
+      <span class="post-comments-count disqus-comment-count" data-disqus-identifier="2020/01/11/hello-world/" itemprop="commentCount"></span>
+    </a>
+  </span>
+  
+  
+
+        </div>
+      </header>
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+          <!-- Welcome to [Hexo](https://hexo.io/)! This is your very first post. Check [documentation](https://hexo.io/docs/) for more info. If you get any problems when using Hexo, you can find the answer in [troubleshooting](https://hexo.io/docs/troubleshooting.html) or you can ask me on [GitHub](https://github.com/hexojs/hexo/issues). -->
+
+<h2 id="Quick-Start"><a href="#Quick-Start" class="headerlink" title="Quick Start"></a>Quick Start</h2><h3 id="Create-a-new-post"><a href="#Create-a-new-post" class="headerlink" title="Create a new post"></a>Create a new post</h3><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">$ hexo new <span class="string">"My New Post"</span></span><br></pre></td></tr></table></figure>
+
+<p>More info: <a href="https://hexo.io/docs/writing.html" target="_blank" rel="noopener">Writing</a></p>
+<h3 id="Run-server"><a href="#Run-server" class="headerlink" title="Run server"></a>Run server</h3><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">$ hexo server</span><br></pre></td></tr></table></figure>
+
+<p>More info: <a href="https://hexo.io/docs/server.html" target="_blank" rel="noopener">Server</a></p>
+<h3 id="Generate-static-files"><a href="#Generate-static-files" class="headerlink" title="Generate static files"></a>Generate static files</h3><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">$ hexo generate</span><br></pre></td></tr></table></figure>
+
+<p>More info: <a href="https://hexo.io/docs/generating.html" target="_blank" rel="noopener">Generating</a></p>
+<h3 id="Deploy-to-remote-sites"><a href="#Deploy-to-remote-sites" class="headerlink" title="Deploy to remote sites"></a>Deploy to remote sites</h3><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">$ hexo deploy</span><br></pre></td></tr></table></figure>
+
+<p>More info: <a href="https://hexo.io/docs/one-command-deployment.html" target="_blank" rel="noopener">Deployment</a></p>
+
+      
+    </div>
+
+    
+    
+    
+      <footer class="post-footer">
+        <div class="post-eof"></div>
+      </footer>
+  </article>
+  
+  
+  
+
   </div>
 
   
-  <nav class="pagination">
-    <span class="page-number current">1</span><a class="page-number" href="/page/2/">2</a><a class="extend next" rel="next" href="/page/2/"><i class="fa fa-angle-right" aria-label="Next page"></i></a>
-  </nav>
 
 
 
