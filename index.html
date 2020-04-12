@@ -207,7 +207,7 @@
               <span class="post-meta-item-text">Posted on</span>
               
 
-              <time title="Created: 2020-04-12 08:50:54 / Modified: 22:40:17" itemprop="dateCreated datePublished" datetime="2020-04-12T08:50:54+08:00">2020-04-12</time>
+              <time title="Created: 2020-04-12 08:50:54 / Modified: 22:41:11" itemprop="dateCreated datePublished" datetime="2020-04-12T08:50:54+08:00">2020-04-12</time>
             </span>
             <span class="post-meta-item">
               <span class="post-meta-item-icon">
@@ -251,29 +251,14 @@
 <p>几何间隔将其规范化，超平面关于样本点的几何间隔${\gamma_i} = y_i(\frac{w}{|w|}\cdot x_i + \frac{b}{|w|})$，关于训练集额函数间隔为${\gamma} = \min_{i = 1, \dots, N}{\gamma_{i}}$。</p>
 <h2 id="间隔最大化"><a href="#间隔最大化" class="headerlink" title="间隔最大化"></a>间隔最大化</h2><p>SVM基本思想时求解能正确划分数据集并且几何间隔最大的分离超平面。</p>
 <p>线性可分SVM可以转化成如下最优化问题<br>$$<br>\min_{w, b} \frac{1}{2}|w|^2 \ \textrm{s.t.}\ y_i(w \cdot x_i + b) - 1 \ge 0<br>$$</p>
-<h2 id="学习的对偶算法"><a href="#学习的对偶算法" class="headerlink" title="学习的对偶算法"></a>学习的对偶算法</h2><p>首先构建拉格朗日函数<br>$$<br>L(w, b, \alpha) = \frac{1}{2}|w|^2 - \sum_{i = 1}^N \alpha_i y_i (w \cdot x_i + b ) + \sum_{i=1}^N \alpha_i<br>$$<br>其中$\alpha_i \ge 0, \ i = 1, \dots, N$。</p>
-<p>根据拉格朗日对偶性，原始问题的对偶问题是极大极小问题<br>$$<br>\max_{\alpha}\min_{w, b} L(w,b,\alpha)<br>$$<br>先求$\min_{w, b}L(w, b, \alpha)$<br>$$<br>\nabla_{w} L(w, b, \alpha) = w - \sum_{i = 1}^{N} \alpha_i y_i x_i = 0<br>$$</p>
-<p>$$<br>\nabla_b L(w, b, \alpha) = -\sum_{i = 1}^{N} \alpha_i y_i = 0<br>$$</p>
-<p>得到$w = \sum_{i = 1}^{N} \alpha_i y_i x_i$, $\alpha_i y_i = 0$ 。</p>
-<p>代入得到<br>$$<br>\begin{aligned}<br>L(w, b, \alpha) &amp; = \frac{1}{2} \sum_{i = 1}^N \sum_{j = 1}^N \alpha_i\alpha_j y_i y_j (x_i\cdot x_j) -\sum_{i = 1}^N \alpha_i y_i ((\sum_{j=1}^N \alpha_j y_j x_j) x_i + b) + \sum_{i = 1}^N \alpha_i \<br>&amp; = - \frac{1}{2} \sum_{i = 1}^N \sum_{j = 1}^N \alpha_i\alpha_j y_i y_j (x_i\cdot x_j)  + \sum_{i = 1}^N \alpha_i<br>\end{aligned}<br>$$<br>求$\min_{w,b}L(w, b, \alpha)$对$\alpha$的极大，即时对偶问题。将目标函数由极大转换成求最小，求得到<br>$$\min_{\alpha}  \frac{1}{2} \sum_{i=1}^N \sum_{j = 1}^N \alpha_i \alpha_j y_i y_j (x_i \cdot x_j) - \sum_{i = 1}^N \alpha_i$$<br>$$\textrm{s.t.} \sum_{i=1}^N \alpha_i y_i = 0 $$<br>$$\alpha_i \ge 0, \ i = 1, \dots, N$$</p>
-<p>设$\alpha^{*}$是对偶问题的解，KKT条件成立，得到<br>$$<br>\begin{aligned}<br>\nabla_{w}L(w^{*}, b^{*}, \alpha^{*}) = w^{*} - \sum_{i=1}^N \alpha_i^{*}y_i x_i = 0 \<br>\nabla_b L(w^{*}, b^{*}, \alpha^{*}) = \sum_{i=1}^N \alpha_i^{*} y_i = 0 \<br> \alpha_i^{*}(y_i(w^{*} \cdot x_i + b^{*})-1) = 0, \ i = 1, \dots, N \<br>y_i(w^{*} \cdot x_i + b^{*})-1 \ge 0, \ i = 1, \dots, N \<br>\alpha_i \ge 0,\  i = 1, \dots, N<br>\end{aligned}<br>$$<br>由此得到$w^{*} =  \sum_{i=1}^N \alpha_i^{*}y_i x_i$。其中至少有一个$\alpha_j^{*} &gt; 0$，对它有$y_j(w^{*}\cdot x_j + b^{*}) -1 = 0$。注意到$y_j^2 = 1$，所以有$b^{*} = y_j - \sum_{i=1}^N \alpha_iy_i(x_i \cdot x_j)$。</p>
-<p>分离超平面可以携程<br>$$<br>\sum_{i=1}^N \alpha_i^{*}y_i(x\cdot x_i) + b^{*} = 0<br>$$<br>分类决策函数可以写成<br>$$<br>f(x) = \textrm{sign}(\sum_{i=1}^N \alpha_iy_i(x\cdot x_i) + b^{*})<br>$$<br>它只依赖于输入$x$和训练样本输入的内积。</p>
-<p>数据集中$\alpha_i&gt;0$的样本点称为支持向量。</p>
-<h1 id="线性支持向量机-amp-软间隔最大化"><a href="#线性支持向量机-amp-软间隔最大化" class="headerlink" title="线性支持向量机&amp;软间隔最大化"></a>线性支持向量机&amp;软间隔最大化</h1><p>假设训练数据集不是线性可分的，引入松弛变量$\xi$<br>$$<br>\begin{aligned}<br>\min_{w, b, \xi} &amp; \frac{1}{2}|w|^2 + C \sum_{i=1}^N \xi_i \<br>\textrm{s.t.} &amp; y_i(w{*}x_i + b) \ge 1 - \xi_i,\ i = 1, \dots, N \<br>&amp; \xi_i \ge 0 ,\ i = 1, \dots, N<br>\end{aligned}<br>$$<br>拉格朗日函数<br>$$<br>L(w, b, \xi, \alpha, \mu) = \frac{1}{2}|w|^2 + C\sum_{i=1}^N \xi_i - \sum_{i=1}^N \alpha_i( y_i(w {*} x_i + b) - 1 + \xi_i) - \sum_{i=1}^N \mu_i \xi_i<br>$$<br>其中$\alpha_i \ge 0, \mu_i \ge 0$。</p>
-<p>先对$w, b, \xi$求极小<br>$$<br>\begin{aligned}<br> \nabla_w L(w, b, \xi, \alpha, \mu) = w - \sum_{i=1}^N \alpha_i y_i x_i = 0\<br> \nabla_b L(w, b, \xi, \alpha, \mu) = -\sum_{i=1}^N \alpha_i y_i = 0 \<br> \nabla_\xi L(w, b, \xi, \alpha, \mu) = C - \alpha_i - \mu_i = 0<br>\end{aligned}<br>$$<br>得到<br>$$<br>\begin{aligned}<br> w = \sum_{i=1}^N \alpha_i y_i x_i \<br> \sum_{i=1}^N \alpha_i y_i = 0 \<br> C - \alpha_i - \mu_i = 0<br>\end{aligned}<br>$$<br>代入得到<br>$$<br>\min_{w, b, \xi} L(w, b, \xi, \alpha, \mu) = -\frac{1}{2} \sum_{i=1}^N\sum_{j=1}^N \alpha_i \alpha_j y_i y_j (x_i \cdot x_j) + \sum_{i=1}^N \alpha_i<br>$$<br>得到对偶最优化为<br>$$<br>\begin{aligned}<br>\max_{\alpha}&amp;  -\frac{1}{2} \sum_{i=1}^N\sum_{j=1}^N \alpha_i \alpha_j y_i y_j (x_i \cdot x_j) + \sum_{i=1}^N \alpha_i \<br>\textrm{s.t.} &amp; \sum_{i=1}^N \alpha_i y_i = 0 \<br>&amp; C - \alpha_i - \mu_i = 0, \ i = 1, \dots, N \<br>&amp; \alpha_i \ge 0 , \ i = 1, \dots, N \<br>&amp; \mu_i \ge 0 , \ i = 1, \dots, N \<br>\end{aligned}<br>$$<br>消去$\mu$<br>$$<br>\begin{aligned}<br>\max_{\alpha}&amp;  -\frac{1}{2} \sum_{i=1}^N\sum_{j=1}^N \alpha_i \alpha_j y_i y_j (x_i \cdot x_j) + \sum_{i=1}^N \alpha_i \<br>\textrm{s.t.} &amp; \sum_{i=1}^N \alpha_i y_i = 0 \<br>&amp; 0 \le \alpha_i \le C , \ i = 1, \dots, N \<br>\end{aligned}<br>$$<br>设$\alpha$是对偶问题的一个解，满足KKT条件<br>$$<br>\begin{aligned}<br> \nabla_w L(w^{*}, b^{*}, \xi^{*}, \alpha^{*}, \mu^{*}) = w^{*} - \sum_{i=1}^N \alpha_i^{*} y_i x_i = 0\<br> \nabla_b L(w^{*}, b^{*}, \xi^{*}, \alpha^{*}, \mu^{*})  = -\sum_{i=1}^N \alpha_i^{*} y_i = 0 \<br> \nabla_\xi L(w^{*}, b^{*}, \xi^{*}, \alpha^{*}, \mu^{*})  = C - \alpha_i^{*} - \mu_i^{*} = 0 \<br> \alpha_i^{*} ((y_i(w^{*} \cdot x_i) + b^{*} - 1 + \xi_i^{*}) = 0 \<br> \mu_i^{*} \xi_i^{*} = 0 \<br> \alpha_i^{*} \ge 0 \<br> y_i(w^{*} \cdot x_i) + b^{*} - 1 + \xi_i^{*} \ge 0 \<br> \mu_i^{*} \ge 0 \<br> \xi_i^{*} = 0 \<br>\end{aligned}<br>$$<br>得到$ w^{*} = \sum_{i=1}^N \alpha_i^{*} y_i x_i$。若存在$\alpha_j^{*}, 0 &lt; \alpha_j^{*} &lt; C$，则 $y_j(w^{*} \cdot x_j) + b^{*} - 1 = 0$。从而得到$b^{*} = y_j - \sum_{i = 1}^N y_i\alpha_i^{*}(x_i\cdot x_j)$</p>
-<p>分离超平面可以写成<br>$$<br>\sum_{i = 1}^N y_i\alpha_i^{*}(x\cdot x_i) + b^{*} = 0<br>$$<br>分类决策函数写成<br>$$<br>f(x) = \textrm{sign} (\sum_{i = 1}^N y_i\alpha_i^{*}(x\cdot x_i) + b^{*})<br>$$<br>$\alpha_i^{*}&gt;0$的实例称为软间隔的支持向量。若$\alpha_i^{*} &lt; C$，则$\xi_i = 0$，支持向量恰好落在间隔边界上；当$\alpha_i^{*} = C$时，若$0 &lt; \xi_i &lt;1$，则分类正确，实例在间隔边界和分离超平面之间，若$\xi_i = 1$，实例在分离超平面上，若$\xi_i &gt; 1$，则实例在分离超平面误分类的一侧。</p>
-<p>线性SVM原始最优化问题等价于<br>$$<br>\min_{w, b} \sum_{i=1}^N \max(1 - y_i(w\cdot x_1 + b), 0) + \lambda|w|^2<br>$$</p>
-<h1 id="非线性支持向量机-amp-核函数"><a href="#非线性支持向量机-amp-核函数" class="headerlink" title="非线性支持向量机&amp;核函数"></a>非线性支持向量机&amp;核函数</h1><h2 id="核技巧"><a href="#核技巧" class="headerlink" title="核技巧"></a>核技巧</h2><p>通过非线性变换将原空间的数据映射到新空间，在新空间里用线性分类学习方法从训练数据里学习分类模型。</p>
-<h2 id="核函数"><a href="#核函数" class="headerlink" title="核函数"></a>核函数</h2><p>如果存在一个从输入空间$\mathcal{X}$到特征空间$\mathcal{H}$的映射$\phi(x): \mathcal{X}\to \mathcal{H}$使所有$x, z \in \mathcal{X}$，函数$K(x, z)$满足条件$K(x, z) = \phi(x) \cdot \phi(z)$，则称$K(x, z)$为核函数。</p>
-<p>$K(x, z)$为正定核函数的充要条件为对任意$x_i \in \mathcal{X}, i = 1, \dots, m$，$K(x, z)$对应的Gram矩阵$K = [K(x_i, x_j)]_{m\times m}$是半正定矩阵。</p>
-<p>常用核函数：</p>
-<p>多项式核函数：$K(x, z) = (x\cdot z + 1)^p$</p>
-<p>高斯核函数：$K(x, z) = \exp(- \frac{|x - z|^2}{2\sigma^2})$</p>
-<p>字符串核函数：</p>
-<p>考虑字符串$s$的子串$u$，给定指标序列$i$，$u = s(i)$，第一个字符到最后一个字符的距离为$l(i)$。$R^{\Sigma^n}$表示定义在所有长度为$n$的字符串的集合上的实数空间，每一维对应一个字符串$u \in \Sigma^n$，映射$\phi_n(s)$将字符串$s$映射$R^{\Sigma^n}$上的一个向量，其在$u$维上的取值为$\lbrack \phi_{n} (s)\rbrack_u = \sum_{i:s(i) = u}\lambda^{l(i)}$。最终得到核函数<br>$$<br>k_n(s, t) = \sum_{u \in \Sigma^n} \lbrack  \phi_n(s)\rbrack_u \lbrack  \phi_n(t)\rbrack_u =  \sum_{u \in \Sigma^n} \sum_{(i, j):s(i) = t(j) = u} \lambda^{l(i)}   \lambda^{l(j)}<br>$$</p>
-<h2 id="非线性支持向量机"><a href="#非线性支持向量机" class="headerlink" title="非线性支持向量机"></a>非线性支持向量机</h2><p>从非线性分类训练集，通过核函数与软间隔最大化，学习到的分类决策函数<br>$$<br>f(x) = \textrm{sign}(\sum_{i=1}^N \alpha_i^{*} y_i K(x, x_i) + b^{*})<br>$$<br>称为非线性支持向量机。</p>
-<h1 id="SMO算法"><a href="#SMO算法" class="headerlink" title="SMO算法"></a>SMO算法</h1><p>不断地将原来的二次规划问题分解为只有两个变量的二次规划子问题，并对子问题进行解析求解，直到所有变量所有变量满足KKT条件。</p>
-
+          <!--noindex-->
+            <div class="post-button">
+              <a class="btn" href="/2020/04/12/%E7%BB%9F%E8%AE%A1%E5%AD%A6%E4%B9%A0%E6%96%B9%E6%B3%95%E7%AC%94%E8%AE%B05-SVM/#more" rel="contents">
+                Read more &raquo;
+              </a>
+            </div>
+          <!--/noindex-->
+        
       
     </div>
 

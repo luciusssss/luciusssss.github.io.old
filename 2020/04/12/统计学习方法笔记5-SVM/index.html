@@ -53,7 +53,7 @@
 <meta property="og:site_name" content="Blog - Lucius">
 <meta property="og:description" content="线性可分支持向量机&amp;硬间隔最大化线性可分支持向量机给定线性可分训练数据集，通过间隔最大化或者等价地求解相应的凸二次规划问题得到的分离超平面为$w^{*} \cdot x + b^{*} &#x3D; 0$和分类决策函数$f(x) &#x3D; \textrm{sign}(w^{*} \cdot x + b^{*})$称为线性可分支持向量机。 函数间隔&amp;几何间隔超平面关于样本点的函数间隔$\hat{\g">
 <meta property="article:published_time" content="2020-04-12T00:50:54.000Z">
-<meta property="article:modified_time" content="2020-04-12T14:40:17.232Z">
+<meta property="article:modified_time" content="2020-04-12T14:41:11.000Z">
 <meta property="article:author" content="Lucius">
 <meta name="twitter:card" content="summary">
 
@@ -208,7 +208,7 @@
               <span class="post-meta-item-text">Posted on</span>
               
 
-              <time title="Created: 2020-04-12 08:50:54 / Modified: 22:40:17" itemprop="dateCreated datePublished" datetime="2020-04-12T08:50:54+08:00">2020-04-12</time>
+              <time title="Created: 2020-04-12 08:50:54 / Modified: 22:41:11" itemprop="dateCreated datePublished" datetime="2020-04-12T08:50:54+08:00">2020-04-12</time>
             </span>
             <span class="post-meta-item">
               <span class="post-meta-item-icon">
@@ -252,6 +252,8 @@
 <p>几何间隔将其规范化，超平面关于样本点的几何间隔${\gamma_i} = y_i(\frac{w}{|w|}\cdot x_i + \frac{b}{|w|})$，关于训练集额函数间隔为${\gamma} = \min_{i = 1, \dots, N}{\gamma_{i}}$。</p>
 <h2 id="间隔最大化"><a href="#间隔最大化" class="headerlink" title="间隔最大化"></a>间隔最大化</h2><p>SVM基本思想时求解能正确划分数据集并且几何间隔最大的分离超平面。</p>
 <p>线性可分SVM可以转化成如下最优化问题<br>$$<br>\min_{w, b} \frac{1}{2}|w|^2 \ \textrm{s.t.}\ y_i(w \cdot x_i + b) - 1 \ge 0<br>$$</p>
+<a id="more"></a>
+
 <h2 id="学习的对偶算法"><a href="#学习的对偶算法" class="headerlink" title="学习的对偶算法"></a>学习的对偶算法</h2><p>首先构建拉格朗日函数<br>$$<br>L(w, b, \alpha) = \frac{1}{2}|w|^2 - \sum_{i = 1}^N \alpha_i y_i (w \cdot x_i + b ) + \sum_{i=1}^N \alpha_i<br>$$<br>其中$\alpha_i \ge 0, \ i = 1, \dots, N$。</p>
 <p>根据拉格朗日对偶性，原始问题的对偶问题是极大极小问题<br>$$<br>\max_{\alpha}\min_{w, b} L(w,b,\alpha)<br>$$<br>先求$\min_{w, b}L(w, b, \alpha)$<br>$$<br>\nabla_{w} L(w, b, \alpha) = w - \sum_{i = 1}^{N} \alpha_i y_i x_i = 0<br>$$</p>
 <p>$$<br>\nabla_b L(w, b, \alpha) = -\sum_{i = 1}^{N} \alpha_i y_i = 0<br>$$</p>
