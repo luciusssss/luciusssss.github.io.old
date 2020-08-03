@@ -6,7 +6,7 @@
   <link href="/atom.xml" rel="self"/>
   
   <link href="http://luciusssss.github.io/"/>
-  <updated>2020-08-03T11:13:44.728Z</updated>
+  <updated>2020-08-03T12:50:57.651Z</updated>
   <id>http://luciusssss.github.io/</id>
   
   <author>
@@ -15,6 +15,35 @@
   </author>
   
   <generator uri="https://hexo.io/">Hexo</generator>
+  
+  <entry>
+    <title>Stanford Compilers 笔记</title>
+    <link href="http://luciusssss.github.io/2020/08/03/Stanford-Compilers-%E7%AC%94%E8%AE%B0/"/>
+    <id>http://luciusssss.github.io/2020/08/03/Stanford-Compilers-%E7%AC%94%E8%AE%B0/</id>
+    <published>2020-08-03T11:50:16.000Z</published>
+    <updated>2020-08-03T12:50:57.651Z</updated>
+    
+    <content type="html"><![CDATA[<p>斯坦福编译网课的笔记</p><h2 id="编译器构成"><a href="#编译器构成" class="headerlink" title="编译器构成"></a>编译器构成</h2><ol><li>Lexical Analysis</li><li>Parsing</li><li>Semantic Analysis</li><li>Optimization</li><li>Code Generation</li></ol><h2 id="Lexical-Analysis"><a href="#Lexical-Analysis" class="headerlink" title="Lexical Analysis"></a>Lexical Analysis</h2><p>词法分析需要做两件事：</p><ul><li>将输入划分成lexeme</li><li>识别出每个lexeme的token class</li></ul><p>过程：</p><p><img src="/2020/08/03/Stanford-Compilers-%E7%AC%94%E8%AE%B0/lexical_analysis.jpg" alt></p>]]></content>
+    
+    <summary type="html">
+    
+      
+      
+        &lt;p&gt;斯坦福编译网课的笔记&lt;/p&gt;
+&lt;h2 id=&quot;编译器构成&quot;&gt;&lt;a href=&quot;#编译器构成&quot; class=&quot;headerlink&quot; title=&quot;编译器构成&quot;&gt;&lt;/a&gt;编译器构成&lt;/h2&gt;&lt;ol&gt;
+&lt;li&gt;Lexical Analysis&lt;/li&gt;
+&lt;li&gt;Parsing&lt;
+      
+    
+    </summary>
+    
+    
+      <category term="编译" scheme="http://luciusssss.github.io/categories/%E7%BC%96%E8%AF%91/"/>
+    
+    
+      <category term="编译" scheme="http://luciusssss.github.io/tags/%E7%BC%96%E8%AF%91/"/>
+    
+  </entry>
   
   <entry>
     <title>统计学习方法笔记5 SVM</title>
