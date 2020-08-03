@@ -1,0 +1,635 @@
+<!DOCTYPE html>
+<html lang="zh-Hans">
+<head>
+  <meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=2">
+<meta name="theme-color" content="#222">
+<meta name="generator" content="Hexo 4.2.0">
+  <link rel="apple-touch-icon" sizes="180x180" href="/images/apple-icon.png">
+  <link rel="icon" type="image/png" sizes="32x32" href="/images/favicon-32x32.png">
+  <link rel="icon" type="image/png" sizes="16x16" href="/images/favicon-16x16.png">
+  <link rel="mask-icon" href="/images/logo.svg" color="#222">
+
+<link rel="stylesheet" href="/css/main.css">
+
+
+<link rel="stylesheet" href="/lib/font-awesome/css/font-awesome.min.css">
+
+
+<script id="hexo-configurations">
+  var NexT = window.NexT || {};
+  var CONFIG = {
+    hostname: new URL('http://luciusssss.github.io').hostname,
+    root: '/',
+    scheme: 'Pisces',
+    version: '7.7.0',
+    exturl: false,
+    sidebar: {"position":"left","display":"post","padding":18,"offset":12,"onmobile":false},
+    copycode: {"enable":false,"show_result":false,"style":null},
+    back2top: {"enable":true,"sidebar":false,"scrollpercent":false},
+    bookmark: {"enable":false,"color":"#222","save":"auto"},
+    fancybox: false,
+    mediumzoom: false,
+    lazyload: false,
+    pangu: false,
+    comments: {"style":"tabs","active":null,"storage":true,"lazyload":false,"nav":null},
+    algolia: {
+      appID: '',
+      apiKey: '',
+      indexName: '',
+      hits: {"per_page":10},
+      labels: {"input_placeholder":"Search for Posts","hits_empty":"We didn't find any results for the search: ${query}","hits_stats":"${hits} results found in ${time} ms"}
+    },
+    localsearch: {"enable":false,"trigger":"auto","top_n_per_article":1,"unescape":false,"preload":false},
+    path: '',
+    motion: {"enable":true,"async":false,"transition":{"post_block":"fadeIn","post_header":"slideDownIn","post_body":"slideDownIn","coll_header":"slideLeftIn","sidebar":"slideUpIn"}}
+  };
+</script>
+
+  <meta name="description" content="去年开始认真读论文还是从7月开始，主要读了很多Question Answering的论文，其中又以Machine Reading Comprehension为主，大概了解了QA这个领域在做些什么。这里我把去年读过的论文简单列一下。其中我觉得值得一读的论文我会打上😻。阅读过程中尤其感谢LAI Yuxuan师兄的指导！ Survey NEURAL READING COMPREHENSION AND">
+<meta property="og:type" content="article">
+<meta property="og:title" content="2019，我读过的论文">
+<meta property="og:url" content="http://luciusssss.github.io/2020/01/11/2019%EF%BC%8C%E6%88%91%E8%AF%BB%E8%BF%87%E7%9A%84%E8%AE%BA%E6%96%87/index.html">
+<meta property="og:site_name" content="Blog - Lucius">
+<meta property="og:description" content="去年开始认真读论文还是从7月开始，主要读了很多Question Answering的论文，其中又以Machine Reading Comprehension为主，大概了解了QA这个领域在做些什么。这里我把去年读过的论文简单列一下。其中我觉得值得一读的论文我会打上😻。阅读过程中尤其感谢LAI Yuxuan师兄的指导！ Survey NEURAL READING COMPREHENSION AND">
+<meta property="article:published_time" content="2020-01-11T07:00:13.000Z">
+<meta property="article:modified_time" content="2020-08-03T11:13:44.674Z">
+<meta property="article:author" content="Lucius">
+<meta property="article:tag" content="论文">
+<meta property="article:tag" content="QA">
+<meta name="twitter:card" content="summary">
+
+<link rel="canonical" href="http://luciusssss.github.io/2020/01/11/2019%EF%BC%8C%E6%88%91%E8%AF%BB%E8%BF%87%E7%9A%84%E8%AE%BA%E6%96%87/">
+
+
+<script id="page-configurations">
+  // https://hexo.io/docs/variables.html
+  CONFIG.page = {
+    sidebar: "",
+    isHome: false,
+    isPost: true
+  };
+</script>
+
+  <title>2019，我读过的论文 | Blog - Lucius</title>
+  
+
+
+
+
+
+
+  <noscript>
+  <style>
+  .use-motion .brand,
+  .use-motion .menu-item,
+  .sidebar-inner,
+  .use-motion .post-block,
+  .use-motion .pagination,
+  .use-motion .comments,
+  .use-motion .post-header,
+  .use-motion .post-body,
+  .use-motion .collection-header { opacity: initial; }
+
+  .use-motion .site-title,
+  .use-motion .site-subtitle {
+    opacity: initial;
+    top: initial;
+  }
+
+  .use-motion .logo-line-before i { left: initial; }
+  .use-motion .logo-line-after i { right: initial; }
+  </style>
+</noscript>
+
+<link rel="alternate" href="/atom.xml" title="Blog - Lucius" type="application/atom+xml">
+</head>
+
+<body itemscope itemtype="http://schema.org/WebPage">
+  <div class="container use-motion">
+    <div class="headband"></div>
+
+    <header class="header" itemscope itemtype="http://schema.org/WPHeader">
+      <div class="header-inner"><div class="site-brand-container">
+  <div class="site-meta">
+
+    <div>
+      <a href="/" class="brand" rel="start">
+        <span class="logo-line-before"><i></i></span>
+        <span class="site-title">Blog - Lucius</span>
+        <span class="logo-line-after"><i></i></span>
+      </a>
+    </div>
+  </div>
+
+  <div class="site-nav-toggle">
+    <div class="toggle" aria-label="Toggle navigation bar">
+      <span class="toggle-line toggle-line-first"></span>
+      <span class="toggle-line toggle-line-middle"></span>
+      <span class="toggle-line toggle-line-last"></span>
+    </div>
+  </div>
+</div>
+
+
+<nav class="site-nav">
+  
+  <ul id="menu" class="menu">
+        <li class="menu-item menu-item-home">
+
+    <a href="/" rel="section"><i class="fa fa-fw fa-home"></i>Home</a>
+
+  </li>
+        <li class="menu-item menu-item-about">
+
+    <a href="/about/" rel="section"><i class="fa fa-fw fa-user"></i>About</a>
+
+  </li>
+        <li class="menu-item menu-item-tags">
+
+    <a href="/tags/" rel="section"><i class="fa fa-fw fa-tags"></i>Tags</a>
+
+  </li>
+        <li class="menu-item menu-item-categories">
+
+    <a href="/categories/" rel="section"><i class="fa fa-fw fa-th"></i>Categories</a>
+
+  </li>
+        <li class="menu-item menu-item-archives">
+
+    <a href="/archives/" rel="section"><i class="fa fa-fw fa-archive"></i>Archives</a>
+
+  </li>
+  </ul>
+
+</nav>
+</div>
+    </header>
+
+    
+  <div class="back-to-top">
+    <i class="fa fa-arrow-up"></i>
+    <span>0%</span>
+  </div>
+
+
+    <main class="main">
+      <div class="main-inner">
+        <div class="content-wrap">
+          
+
+          <div class="content">
+            
+
+  <div class="posts-expand">
+      
+  
+  
+  <article itemscope itemtype="http://schema.org/Article" class="post-block " lang="zh-Hans">
+    <link itemprop="mainEntityOfPage" href="http://luciusssss.github.io/2020/01/11/2019%EF%BC%8C%E6%88%91%E8%AF%BB%E8%BF%87%E7%9A%84%E8%AE%BA%E6%96%87/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="image" content="/images/avatar.png">
+      <meta itemprop="name" content="Lucius">
+      <meta itemprop="description" content="Per aspera ad astra.">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="Blog - Lucius">
+    </span>
+      <header class="post-header">
+        <h1 class="post-title" itemprop="name headline">
+          2019，我读过的论文
+        </h1>
+
+        <div class="post-meta">
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              <span class="post-meta-item-text">Posted on</span>
+
+              <time title="Created: 2020-01-11 15:00:13" itemprop="dateCreated datePublished" datetime="2020-01-11T15:00:13+08:00">2020-01-11</time>
+            </span>
+              <span class="post-meta-item">
+                <span class="post-meta-item-icon">
+                  <i class="fa fa-calendar-check-o"></i>
+                </span>
+                <span class="post-meta-item-text">Edited on</span>
+                <time title="Modified: 2020-08-03 19:13:44" itemprop="dateModified" datetime="2020-08-03T19:13:44+08:00">2020-08-03</time>
+              </span>
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="fa fa-folder-o"></i>
+              </span>
+              <span class="post-meta-item-text">In</span>
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/%E8%AE%BA%E6%96%87/" itemprop="url" rel="index">
+                    <span itemprop="name">论文</span>
+                  </a>
+                </span>
+            </span>
+
+          
+  
+  <span class="post-meta-item">
+    
+      <span class="post-meta-item-icon">
+        <i class="fa fa-comment-o"></i>
+      </span>
+      <span class="post-meta-item-text">Disqus: </span>
+    
+    <a title="disqus" href="/2020/01/11/2019%EF%BC%8C%E6%88%91%E8%AF%BB%E8%BF%87%E7%9A%84%E8%AE%BA%E6%96%87/#comments" itemprop="discussionUrl">
+      <span class="post-comments-count disqus-comment-count" data-disqus-identifier="2020/01/11/2019，我读过的论文/" itemprop="commentCount"></span>
+    </a>
+  </span>
+  
+  
+
+        </div>
+      </header>
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+        <p>去年开始认真读论文还是从7月开始，主要读了很多Question Answering的论文，其中又以Machine Reading Comprehension为主，大概了解了QA这个领域在做些什么。<br>这里我把去年读过的论文简单列一下。其中我觉得值得一读的论文我会打上😻。<br>阅读过程中尤其感谢LAI Yuxuan师兄的指导！</p>
+<h2 id="Survey"><a href="#Survey" class="headerlink" title="Survey"></a>Survey</h2><ul>
+<li><p>NEURAL READING COMPREHENSION AND BEYOND 😻<br><em>Chen Danqi</em><br>陈丹琦的博士毕业论文，一篇对MRC比较全面且易懂的综述。</p>
+</li>
+<li><p>Neural Machine Reading Comprehension: Methods and Trends<br><em>Shanshan Liu, Xin Zhang, Sheng Zhang, Hui Wang, Weiming Zhang</em><br>国防科大的MRC综述，一些想法很大胆，但一些地方没有讲明白。</p>
+</li>
+<li><p>Recent Advances in Natural Language Inference: A Survey of Benchmarks, Resources, and Approaches 😻<br><em>Shane Storks, Qiaozi Gao, Joyce Y. Chai</em><br>对于（广义的）Commonsense QA做的综述。</p>
+</li>
+</ul>
+<a id="more"></a>
+
+
+<h2 id="Machine-Reading-Comprehension-Dataset"><a href="#Machine-Reading-Comprehension-Dataset" class="headerlink" title="Machine Reading Comprehension Dataset"></a>Machine Reading Comprehension Dataset</h2><ul>
+<li><p>SQuAD: 100,000+ Questions for Machine Comprehension of Text 😻<br><em>Pranav Rajpurkar, Jian Zhang, Konstantin Lopyrev, Percy Liang</em>, EMNLP 16<br>MRC领域最经典的数据集SQuAD。这是不含unanswerable question的1.0版本，问题来源于wikipedia，人工根据文章提问题。</p>
+</li>
+<li><p>Know What You Don’t Know: Unanswerable Questions for SQuAD 😻<br><em>Pranav Rajpurkar, Robin Jia, Percy Liang</em>, ACL 18<br>SQuAD 2.0，加入了大量unanswerable question</p>
+</li>
+<li><p>NewsQA: A Machine Comprehension Dataset<br><em>Adam Trischler, Tong Wang, Xingdi Yuan, Justin Harris, Alessandro Sordoni, Philip Bachman, Kaheer Suleman</em><br>文章来源于CNN，提问者只能看到新闻的summary points，答案从来自新闻正文，从而避免问题和文章过于相似。</p>
+</li>
+<li><p>ReCoRD: Bridging the Gap between Human and Machine Commonsense Reading Comprehension<br><em>Sheng Zhang, Xiaodong Liu, Jingjing Liu, Jianfeng Gao, Kevin Duh, Benjamin Van Durme</em><br>一个cloze形式的阅读理解数据集。文章是新闻的前几段，从新闻的剩余部分挑一个句子，挖掉句子中一个实体当作问题。</p>
+</li>
+<li><p>Natural Questions: A Benchmark for Question Answering Research 😻<br><em>Google</em>, TACL 19<br>以整个维基页面为文章，文章较长，同时标注长答案和短答案。</p>
+</li>
+<li><p>BoolQ: Exploring the Surprising Difficulty of Natural Yes/No Questions<br><em>Christopher Clark, Kenton Lee, Ming-Wei Chang, Tom Kwiatkowski, Michael Collins, Kristina Toutanova</em>, NAACL 19<br>研究自然产生的yes/no questions，制作了阅读理解数据集BoolQ，发现从entailment data迁移学习在它上面表现较好。</p>
+</li>
+<li><p>QUOREF: A Reading Comprehension Dataset with Questions Requiring Coreferential Reasoning<br><em>Pradeep Dasigi, Nelson F. Liu, Ana Marasović, Noah A. Smith, Matt Gardner</em>, EMNLP 19<br>24k extractive MRC questions, 文章来自wiki(40%的文章是电影情节概要)，需要共指消解。</p>
+</li>
+<li><p>DuoRC: Towards complex language understanding with paraphrased reading comprehension<br><em>Amrita Saha, Rahul Aralikatte, Mitesh M. Khapra, Karthik Sankaranarayanan</em>, ACL 18<br>基于7680对电影情节概要(一篇来自维基，一篇来自imdb)。4 challenges: 很多问题与文章的lexical overlap低；需要background knowledge和commonsense knowledge；叙述性的文章经常需要综合多句的复杂推理；包含no answer的问题。</p>
+</li>
+<li><p>DuReader: a Chinese Machine Reading Comprehension Dataset from Real-world Applications<br><em>Baidu</em>, ACL18<br>中文MRC数据集。</p>
+</li>
+</ul>
+<h2 id="Commonsense-QA-Dataset"><a href="#Commonsense-QA-Dataset" class="headerlink" title="Commonsense QA Dataset"></a>Commonsense QA Dataset</h2><ul>
+<li><p>COMMONSENSEQA: A Question Answering Challenge Targeting Commonsense Knowledge 😻<br><em>Alon Talmor, Jonathan Herzig, Nicholas Lourie, Jonathan Berant</em>, NAACL 19<br>基于ConceptNet做的选择题形式的常识问答。</p>
+</li>
+<li><p>COSMOS QA: Machine Reading Comprehension with Contextual Commonsense Reasoning 😻<br><em>Lifu Huang, Ronan Le Bras, Chandra Bhagavatula, Yejin Choi</em>, EMNLP 19<br>阅读理解形式的选择题常识问答，需要通过commonsense inference来read between the lines。</p>
+</li>
+</ul>
+<h2 id="Other-QA-Dataset"><a href="#Other-QA-Dataset" class="headerlink" title="Other QA Dataset"></a>Other QA Dataset</h2><ul>
+<li><p>GeoSQA: A Benchmark for Scenario-based Question Answering in the Geography Domain at High School<br><em>Zixian Huang, Yulin Shen, Xiao Li, Yuang Wei, Gong Cheng, Lin Zhou, Xinyu Dai, Yuzhong Qu</em>, EMNLP 19<br>高考地理题。如何处理题目中的图？</p>
+</li>
+<li><p>MathQA: Towards Interpretable Math Word Problem Solving with Operation-Based Formalisms<br>37,200个数学题，附有选项和解题路径。</p>
+</li>
+</ul>
+<h2 id="Dataset-Analysis-amp-Model-Analysis"><a href="#Dataset-Analysis-amp-Model-Analysis" class="headerlink" title="Dataset Analysis &amp; Model Analysis"></a>Dataset Analysis &amp; Model Analysis</h2><ul>
+<li><p>What Makes Reading Comprehension Questions Easier?<br><em>Saku Sugawara, Kentaro Inui, Satoshi Sekine, Akiko Aizawa</em>, EMNLP 18<br>分析最近的12个MRC数据集，通过启发式规则分割数据集，然后检查各自的表现，认为<em>hard questions require knowledge inference and multiple-sentence reasoning</em>。</p>
+</li>
+<li><p>Adversarial Examples for Evaluating Reading Comprehension Systems 😻<br><em>Robin Jia, Percy Liang</em>, EMNLP 19<br>对MRC进行反思的比较早的一篇。通过在文章结尾加上对抗性的句子能让模型回答错问题。</p>
+</li>
+<li><p>Do NLP Models Know Numbers? Probing Numeracy in Embeddings 😻<br><em>Eric Wallace, Yizhong Wang, Sujian Li, Sameer Singh, Matt Gardner</em>, EMNLP 19<br>研究发现state-of-the-art的QA模型在DROP上也表现出很好的numerical reasoning能力。为了理解这种能力如何产生，作者探索了各种embedding方法在list maximum, number encoding, addition三个任务上的表现。发现standard embeddings中存在着很大程度的numeracy，character-level embeddings对numeracy的表示很精确。</p>
+</li>
+</ul>
+<h2 id="QA-Model"><a href="#QA-Model" class="headerlink" title="QA Model"></a>QA Model</h2><ul>
+<li><p>Bidirectional Attention Flow for Machine Comprehension 😻<br><em>Minjoon Seo, Aniruddha Kembhavi, Ali Farhadi, Hannaneh Hajishirzi</em>, ICLR 17<br>基于文章和问题双向注意力的BiDAF模型。是MRC中基于注意力机制最经典的模型。</p>
+</li>
+<li><p>Latent Retrieval for Weakly Supervised Open Domain Question Answering<br><em>Kenton Lee, Ming-Wei Chang, Kristina Toutanova</em>, ACL 19<br>提了一个Open Domain QA的端到端模型。</p>
+<p><strong>下面是对于Conversational MRC的方法：</strong></p>
+</li>
+<li><p>GRAPHFLOW: Exploiting Conversation Flow with Graph Neural Networks for Conversational Machine Comprehension<br><em>Yu Chen, Lingfei Wu, Mohammed J. Zaki</em><br>做conversational MRC的，捕获对话中的conversational flow：将conversational flow建模成对话中的一系列latent states。</p>
+</li>
+<li><p>Answering Conversational Questions on Structured Data without Logical Forms<br><em>Thomas Müller, Francesco Piccinno, Massimo Nicosia, Peter Shaw, Yasemin Altun</em>, EMNLP 19<br>搜集了 包含6k个对于维基上的半结构化表格进行询问的问题序列 的数据集，并提出了一个无需logical froms的weakly supervised semantic parsing模型。</p>
+</li>
+<li><p>Technical report on Conversational Question Answering<br>在CoQA上使用RoBERTa + AT(Adversarial Training) + KD(Knowledge Distillation)，达到90.4 F1。</p>
+<p><strong>下面是对于Multi-hop MRC的方法：</strong></p>
+</li>
+<li><p>Token-level Dynamic Self-Attention Network for Multi-Passage Reading Comprehension<br><em>Yimeng Zhuang, Huadong Wang</em>, ACL 19<br>在token-level处理cross-passage infomation，能够动态地从序列中选取重要的token，达到speed, memory和accuracy的平衡。</p>
+</li>
+<li><p>Answering Complex Open-domain Questions Through Iterative Query Generation<br><em>Peng Qi, Xiaowen Lin, Leo Mehr, Zijian Wang, Christopher D. Manning</em>, EMNLP 19<br>在每一步，利用之前hop的IR结果生成一个新的自然语言query，用off-the-shelf的IR系统去retrive新的证据来回答问题。</p>
+</li>
+<li><p>Cognitive Graph for Multi-Hop Reading Comprehension at Scale<br><em>Ming Ding, Chang Zhou, Qibin Chen, Hongxia Yang, Jie Tang</em>, ACL 19<br>根据心理学中的Dual process theory，大脑先无意识地、隐性地、直觉地利用注意力检索相关信息(system 1)，然后有意识地、显性地、可控地进行推理(system 2)。</p>
+<p><strong>下面是对于Commonsense QA的方法和一些引入External Knowledge的方法：</strong></p>
+</li>
+<li><p>Augmenting Neural Networks with First-order Logic<br><em>Tao Li, Vivek Srikumar</em>, ACL19<br>直接把一阶逻辑表示的外部知识（这里用了ConceptNet）嵌入到神经网络架构中，而仍然保持端到端的训练方式，同时依靠这些外部规则来减少对数据的依赖。</p>
+</li>
+<li><p>Align, Mask and Select: A Simple Method for Incorporating Commonsense Knowledge into Language Representation Models<br><em>Zhi-Xiu Ye, Qian Chen, Wen Wang, Zhen-Hua Ling</em><br>现存预训练的语言表示模型很少考虑直接将常识知识嵌入。本文用“align, mask, and select”的方法构造有关常识的数据集，并在它上面预训练BERT，从而将常识知识引入到语言表示模型。</p>
+</li>
+<li><p>Explicit Utilization of General Knowledge in Machine Reading Comprehension 😻<br><em>Chao Wang, Hui Jiang</em>, ACL 19<br>现有MRC模型与人类之间的gap体现在对数据的需求和抵御噪声的鲁棒性。为了缓解这两个问题，作者使用WordNet从passage-question pair中抽取词间语义关系作为general knowledge，来辅助端到端模型中的注意力机制。</p>
+</li>
+<li><p>Enhancing Pre-Trained Language Representations with Rich Knowledge for Machine Reading Comprehension<br><em>An Yang, Quan Wang, Jing Liu, Kai Liu, Yajuan Lyu, Hua Wu, Qiaoqiao She, Sujian Li</em>, ACL 19<br>使用WordNet和NELL两个KB作为MRC的外部知识，通过注意力机制选取需要的知识注入到BERT中，在Record和squad1.1上取得了很好的效果。</p>
+</li>
+<li><p>Careful Selection of Knowledge to solve Open Book Question Answering<br><em>Pratyay Banerjee, Kuntal Kumar Pal, Arindam Mitra, Chitta Baral</em><br>用比较IR的方法做OpenBookQA。</p>
+</li>
+<li><p>KagNet: Knowledge-Aware Graph Networks for Commonsense Reasoning 😻<br>一种类似DBQA的方法，利用ConceptNet建图做COMMONSENSEQA数据集。</p>
+<p><strong>下面是对于Discrete Reasoning和Multi-span Extraction的方法（主要是针对DROP数据集）：</strong><br>DROP数据集答案包含多种类型：data、number、text span(s)，需要numerical operations比如adding、 sorting、counting。</p>
+</li>
+<li><p>A Multi-Type Multi-Span Network for Reading Comprehension that Requires Discrete Reasoning<br><em>Minghao Hu, Yuxing Peng, Zhen Huang, Dongsheng Li</em>, EMNLP 19</p>
+</li>
+<li><p>Giving BERT a Calculator: Finding Operations and Arguments with Reading Comprehension 😻<br><em>Google</em>, EMNLP 19</p>
+</li>
+<li><p>A Discrete Hard EM Approach for Weakly Supervised Question Answering<br><em>Sewon Min, Danqi Chen, Hannaneh Hajishirzi, Luke Zettlemoyer</em>, EMNLP 19</p>
+</li>
+<li><p>Tag-based Multi-Span Extraction in Reading Comprehension<br><em>Avia Efrat, Elad Segal, Mor Shoham</em></p>
+<p><strong>下面是处理Unanswerable Questions的方法：</strong> </p>
+</li>
+<li><p>Relation Module for Non-answerable Prediction on Reading Comprehension<br><em>DiDi</em><br>通过增加relation module来提高MRC模型判断问题是否有答案的能力。</p>
+</li>
+</ul>
+<h2 id="Transfer-Learning-amp-Multi-task-Learning"><a href="#Transfer-Learning-amp-Multi-task-Learning" class="headerlink" title="Transfer Learning &amp; Multi-task Learning"></a>Transfer Learning &amp; Multi-task Learning</h2><ul>
+<li><p>MultiQA: An Empirical Investigation of Generalization and Transfer in Reading Comprehension 😻<br><em>Alon Talmor, Jonathan Berant</em>, ACL 19<br>研究各个MRC数据集能否互相泛化。实验做了很多。</p>
+</li>
+<li><p>Multi-task Learning with Sample Re-weighting for Machine Reading Comprehension<br><em>Yichong Xu, Xiaodong Liu, Yelong Shen, Jingjing Liu, Jianfeng Gao</em>, NAACL 19<br>通过将多个任务的数据集使用精细的采样结合在一起训练，提高模型的泛化性。</p>
+</li>
+<li><p>Unsupervised Domain Adaptation on Reading Comprehension<br>AAAI 20</p>
+</li>
+</ul>
+<h2 id="Question-Generation"><a href="#Question-Generation" class="headerlink" title="Question Generation"></a>Question Generation</h2><ul>
+<li>Learning to Ask Unanswerable Questions for Machine Reading Comprehension 😻<br><em>Haichao Zhu, Li Dong, Furu Wei, Wenhui Wang, Bing Qin, Ting Liu</em>, ACL 19<br>通过一种pair2sequence的方式，由可回答问题和段落生成不可回答问题。生成的不可回答问题当作data augmentation提升了BERT的表现。</li>
+</ul>
+<h2 id="Text-Matching"><a href="#Text-Matching" class="headerlink" title="Text Matching"></a>Text Matching</h2><ul>
+<li><p>MIX: Multi-Channel Information Crossing for Text Matching<br><em>Tencent</em>, KDD 18<br>从多种细粒度进行文本匹配。</p>
+</li>
+<li><p>Enhanced LSTM for Natural Language Inference 😻<br><em>Qian Chen, Xiaodan Zhu, Zhenhua Ling, Si Wei, Hui Jiang, Diana Inkpen</em>, ACL 17<br>一个基于BiLSTM + Attention的很有效的文本匹配模型ESIM。</p>
+</li>
+</ul>
+<h2 id="NLI-Dataset"><a href="#NLI-Dataset" class="headerlink" title="NLI Dataset"></a>NLI Dataset</h2><ul>
+<li>Adversarial NLI: A New Benchmark for Natural Language Understanding 😻<br><em>Facebook</em><br>通过迭代的、对抗性的人类-模型循环，得到了一个大规模的NLI数据集。在这个新数据集上训练的模型在很多NLI数据集上达到state-of-the-art表现。这个数据集也说明了非专家标注者也能成功找到模型们的缺点。数据收集的方法可以运用于never-ending learning，可以成为一个moving target，而非一个快速饱和的静态benchmark。总得来说，解决了现存数据集benchmark longevity和robustness两个问题。</li>
+</ul>
+<h2 id="Story-Ending-Prediction"><a href="#Story-Ending-Prediction" class="headerlink" title="Story Ending Prediction"></a>Story Ending Prediction</h2><p>都是做Story Cloze Test这个数据集的。</p>
+<ul>
+<li>LSDSem 2017: Exploring Data Generation Methods for the Story Cloze Test<br>用了一个feature-based的方法，效果还挺好</li>
+<li>Improving Language Understanding by Generative Pre-Training</li>
+<li>A Multi-Attention based Neural Network with External Knowledge for Story Ending Predicting Task<br>用了SemLM</li>
+<li>An RNN-based Binary Classifier for the Story Cloze Test<br>用了Skip-thought</li>
+<li>A Simple and Effective Approach to the Story Cloze Test<br>用了Skip-thought</li>
+<li>Story Ending Selection by Finding Hints from Pairwise Candidate Endings<br>隔壁的工作，将两个选项同时放入模型进行区分</li>
+<li>Find a Reasonable Ending for Stories: Does Logic Relation Help the Story Cloze Test? 😻<br>AAAI 19。用NLI数据预训练，用逻辑知识辅助判断。</li>
+<li>Narrative Modeling with Memory Chains and Semantic Supervision</li>
+<li>Discriminative Sentence Modeling for Story Ending Prediction<br>AAAI 20</li>
+</ul>
+
+    </div>
+
+    
+    
+    
+
+      <footer class="post-footer">
+          <div class="post-tags">
+              <a href="/tags/%E8%AE%BA%E6%96%87/" rel="tag"># 论文</a>
+              <a href="/tags/QA/" rel="tag"># QA</a>
+          </div>
+
+        
+
+
+        
+    <div class="post-nav">
+      <div class="post-nav-item"></div>
+      <div class="post-nav-item">
+    <a href="/2020/01/20/LeetCode%E5%88%B7%E9%A2%98%E7%AC%94%E8%AE%B0-1/" rel="next" title="LeetCode刷题笔记 1">
+      LeetCode刷题笔记 1 <i class="fa fa-chevron-right"></i>
+    </a></div>
+    </div>
+      </footer>
+    
+  </article>
+  
+  
+  
+
+  </div>
+
+
+          </div>
+          
+    
+  <div class="comments">
+    <div id="disqus_thread">
+      <noscript>Please enable JavaScript to view the comments powered by Disqus.</noscript>
+    </div>
+  </div>
+  
+
+<script>
+  window.addEventListener('tabs:register', () => {
+    let activeClass = CONFIG.comments.activeClass;
+    if (CONFIG.comments.storage) {
+      activeClass = localStorage.getItem('comments_active') || activeClass;
+    }
+    if (activeClass) {
+      let activeTab = document.querySelector(`a[href="#comment-${activeClass}"]`);
+      if (activeTab) {
+        activeTab.click();
+      }
+    }
+  });
+  if (CONFIG.comments.storage) {
+    window.addEventListener('tabs:click', event => {
+      if (!event.target.matches('.tabs-comment .tab-content .tab-pane')) return;
+      let commentClass = event.target.classList[1];
+      localStorage.setItem('comments_active', commentClass);
+    });
+  }
+</script>
+
+        </div>
+          
+  
+  <div class="toggle sidebar-toggle">
+    <span class="toggle-line toggle-line-first"></span>
+    <span class="toggle-line toggle-line-middle"></span>
+    <span class="toggle-line toggle-line-last"></span>
+  </div>
+
+  <aside class="sidebar">
+    <div class="sidebar-inner">
+
+      <ul class="sidebar-nav motion-element">
+        <li class="sidebar-nav-toc">
+          Table of Contents
+        </li>
+        <li class="sidebar-nav-overview">
+          Overview
+        </li>
+      </ul>
+
+      <!--noindex-->
+      <div class="post-toc-wrap sidebar-panel">
+          <div class="post-toc motion-element"><ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#Survey"><span class="nav-number">1.</span> <span class="nav-text">Survey</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#Machine-Reading-Comprehension-Dataset"><span class="nav-number">2.</span> <span class="nav-text">Machine Reading Comprehension Dataset</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#Commonsense-QA-Dataset"><span class="nav-number">3.</span> <span class="nav-text">Commonsense QA Dataset</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#Other-QA-Dataset"><span class="nav-number">4.</span> <span class="nav-text">Other QA Dataset</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#Dataset-Analysis-amp-Model-Analysis"><span class="nav-number">5.</span> <span class="nav-text">Dataset Analysis &amp; Model Analysis</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#QA-Model"><span class="nav-number">6.</span> <span class="nav-text">QA Model</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#Transfer-Learning-amp-Multi-task-Learning"><span class="nav-number">7.</span> <span class="nav-text">Transfer Learning &amp; Multi-task Learning</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#Question-Generation"><span class="nav-number">8.</span> <span class="nav-text">Question Generation</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#Text-Matching"><span class="nav-number">9.</span> <span class="nav-text">Text Matching</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#NLI-Dataset"><span class="nav-number">10.</span> <span class="nav-text">NLI Dataset</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#Story-Ending-Prediction"><span class="nav-number">11.</span> <span class="nav-text">Story Ending Prediction</span></a></li></ol></div>
+      </div>
+      <!--/noindex-->
+
+      <div class="site-overview-wrap sidebar-panel">
+        <div class="site-author motion-element" itemprop="author" itemscope itemtype="http://schema.org/Person">
+    <img class="site-author-image" itemprop="image" alt="Lucius"
+      src="/images/avatar.png">
+  <p class="site-author-name" itemprop="name">Lucius</p>
+  <div class="site-description" itemprop="description">Per aspera ad astra.</div>
+</div>
+<div class="site-state-wrap motion-element">
+  <nav class="site-state">
+      <div class="site-state-item site-state-posts">
+          <a href="/archives/">
+        
+          <span class="site-state-item-count">11</span>
+          <span class="site-state-item-name">posts</span>
+        </a>
+      </div>
+      <div class="site-state-item site-state-categories">
+            <a href="/categories/">
+          
+        <span class="site-state-item-count">4</span>
+        <span class="site-state-item-name">categories</span></a>
+      </div>
+      <div class="site-state-item site-state-tags">
+            <a href="/tags/">
+          
+        <span class="site-state-item-count">12</span>
+        <span class="site-state-item-name">tags</span></a>
+      </div>
+  </nav>
+</div>
+  <div class="links-of-author motion-element">
+      <span class="links-of-author-item">
+        <a href="https://github.com/luciusssss" title="GitHub → https:&#x2F;&#x2F;github.com&#x2F;luciusssss" rel="noopener" target="_blank"><i class="fa fa-fw fa-github"></i>GitHub</a>
+      </span>
+      <span class="links-of-author-item">
+        <a href="mailto:zhangch@pku.edu.cn" title="E-Mail → mailto:zhangch@pku.edu.cn" rel="noopener" target="_blank"><i class="fa fa-fw fa-envelope"></i>E-Mail</a>
+      </span>
+  </div>
+
+
+
+      </div>
+
+    </div>
+  </aside>
+  <div id="sidebar-dimmer"></div>
+
+
+      </div>
+    </main>
+
+    <footer class="footer">
+      <div class="footer-inner">
+        
+
+<div class="copyright">
+  
+  &copy; 
+  <span itemprop="copyrightYear">2020</span>
+  <span class="with-love">
+    <i class="fa fa-user"></i>
+  </span>
+  <span class="author" itemprop="copyrightHolder">Lucius</span>
+</div>
+  <div class="powered-by">Powered by <a href="https://hexo.io/" class="theme-link" rel="noopener" target="_blank">Hexo</a> v4.2.0
+  </div>
+  <span class="post-meta-divider">|</span>
+  <div class="theme-info">Theme – <a href="https://pisces.theme-next.org/" class="theme-link" rel="noopener" target="_blank">NexT.Pisces</a> v7.7.0
+  </div>
+
+        
+
+
+
+
+
+
+
+
+      </div>
+    </footer>
+  </div>
+
+  
+  <script src="/lib/anime.min.js"></script>
+  <script src="/lib/velocity/velocity.min.js"></script>
+  <script src="/lib/velocity/velocity.ui.min.js"></script>
+
+<script src="/js/utils.js"></script>
+
+<script src="/js/motion.js"></script>
+
+
+<script src="/js/schemes/pisces.js"></script>
+
+
+<script src="/js/next-boot.js"></script>
+
+
+
+
+  
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+  
+
+  
+
+  
+
+<script>
+  function loadCount() {
+    var d = document, s = d.createElement('script');
+    s.src = 'https://Lucius.disqus.com/count.js';
+    s.id = 'dsq-count-scr';
+    (d.head || d.body).appendChild(s);
+  }
+  // defer loading until the whole page loading is completed
+  window.addEventListener('load', loadCount, false);
+</script>
+<script>
+  NexT.utils.loadComments(document.querySelector('#disqus_thread'), () => {
+    if (window.DISQUS) {
+      DISQUS.reset({
+        reload: true,
+        config: {page: {
+            url: "http://luciusssss.github.io/2020/01/11/2019%EF%BC%8C%E6%88%91%E8%AF%BB%E8%BF%87%E7%9A%84%E8%AE%BA%E6%96%87/",
+            identifier: "2020/01/11/2019，我读过的论文/",
+            title: "2019，我读过的论文"
+          }
+        }
+      });
+    } else {
+      var d = document, s = d.createElement('script');
+      s.src = 'https://Lucius.disqus.com/embed.js';
+      s.setAttribute('data-timestamp', '' + +new Date());
+      (d.head || d.body).appendChild(s);
+    }
+  });
+</script>
+
+</body>
+</html>

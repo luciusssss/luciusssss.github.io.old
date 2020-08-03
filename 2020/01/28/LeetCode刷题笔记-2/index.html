@@ -1,0 +1,633 @@
+<!DOCTYPE html>
+<html lang="zh-Hans">
+<head>
+  <meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=2">
+<meta name="theme-color" content="#222">
+<meta name="generator" content="Hexo 4.2.0">
+  <link rel="apple-touch-icon" sizes="180x180" href="/images/apple-icon.png">
+  <link rel="icon" type="image/png" sizes="32x32" href="/images/favicon-32x32.png">
+  <link rel="icon" type="image/png" sizes="16x16" href="/images/favicon-16x16.png">
+  <link rel="mask-icon" href="/images/logo.svg" color="#222">
+
+<link rel="stylesheet" href="/css/main.css">
+
+
+<link rel="stylesheet" href="/lib/font-awesome/css/font-awesome.min.css">
+
+
+<script id="hexo-configurations">
+  var NexT = window.NexT || {};
+  var CONFIG = {
+    hostname: new URL('http://luciusssss.github.io').hostname,
+    root: '/',
+    scheme: 'Pisces',
+    version: '7.7.0',
+    exturl: false,
+    sidebar: {"position":"left","display":"post","padding":18,"offset":12,"onmobile":false},
+    copycode: {"enable":false,"show_result":false,"style":null},
+    back2top: {"enable":true,"sidebar":false,"scrollpercent":false},
+    bookmark: {"enable":false,"color":"#222","save":"auto"},
+    fancybox: false,
+    mediumzoom: false,
+    lazyload: false,
+    pangu: false,
+    comments: {"style":"tabs","active":null,"storage":true,"lazyload":false,"nav":null},
+    algolia: {
+      appID: '',
+      apiKey: '',
+      indexName: '',
+      hits: {"per_page":10},
+      labels: {"input_placeholder":"Search for Posts","hits_empty":"We didn't find any results for the search: ${query}","hits_stats":"${hits} results found in ${time} ms"}
+    },
+    localsearch: {"enable":false,"trigger":"auto","top_n_per_article":1,"unescape":false,"preload":false},
+    path: '',
+    motion: {"enable":true,"async":false,"transition":{"post_block":"fadeIn","post_header":"slideDownIn","post_body":"slideDownIn","coll_header":"slideLeftIn","sidebar":"slideUpIn"}}
+  };
+</script>
+
+  <meta name="description" content="开始刷Top 100 Liked Questions啦！（后50题）">
+<meta property="og:type" content="article">
+<meta property="og:title" content="LeetCode刷题笔记 2">
+<meta property="og:url" content="http://luciusssss.github.io/2020/01/28/LeetCode%E5%88%B7%E9%A2%98%E7%AC%94%E8%AE%B0-2/index.html">
+<meta property="og:site_name" content="Blog - Lucius">
+<meta property="og:description" content="开始刷Top 100 Liked Questions啦！（后50题）">
+<meta property="article:published_time" content="2020-01-28T12:10:14.000Z">
+<meta property="article:modified_time" content="2020-08-03T11:13:44.690Z">
+<meta property="article:author" content="Lucius">
+<meta property="article:tag" content="LeetCode">
+<meta property="article:tag" content="算法">
+<meta name="twitter:card" content="summary">
+
+<link rel="canonical" href="http://luciusssss.github.io/2020/01/28/LeetCode%E5%88%B7%E9%A2%98%E7%AC%94%E8%AE%B0-2/">
+
+
+<script id="page-configurations">
+  // https://hexo.io/docs/variables.html
+  CONFIG.page = {
+    sidebar: "",
+    isHome: false,
+    isPost: true
+  };
+</script>
+
+  <title>LeetCode刷题笔记 2 | Blog - Lucius</title>
+  
+
+
+
+
+
+
+  <noscript>
+  <style>
+  .use-motion .brand,
+  .use-motion .menu-item,
+  .sidebar-inner,
+  .use-motion .post-block,
+  .use-motion .pagination,
+  .use-motion .comments,
+  .use-motion .post-header,
+  .use-motion .post-body,
+  .use-motion .collection-header { opacity: initial; }
+
+  .use-motion .site-title,
+  .use-motion .site-subtitle {
+    opacity: initial;
+    top: initial;
+  }
+
+  .use-motion .logo-line-before i { left: initial; }
+  .use-motion .logo-line-after i { right: initial; }
+  </style>
+</noscript>
+
+<link rel="alternate" href="/atom.xml" title="Blog - Lucius" type="application/atom+xml">
+</head>
+
+<body itemscope itemtype="http://schema.org/WebPage">
+  <div class="container use-motion">
+    <div class="headband"></div>
+
+    <header class="header" itemscope itemtype="http://schema.org/WPHeader">
+      <div class="header-inner"><div class="site-brand-container">
+  <div class="site-meta">
+
+    <div>
+      <a href="/" class="brand" rel="start">
+        <span class="logo-line-before"><i></i></span>
+        <span class="site-title">Blog - Lucius</span>
+        <span class="logo-line-after"><i></i></span>
+      </a>
+    </div>
+  </div>
+
+  <div class="site-nav-toggle">
+    <div class="toggle" aria-label="Toggle navigation bar">
+      <span class="toggle-line toggle-line-first"></span>
+      <span class="toggle-line toggle-line-middle"></span>
+      <span class="toggle-line toggle-line-last"></span>
+    </div>
+  </div>
+</div>
+
+
+<nav class="site-nav">
+  
+  <ul id="menu" class="menu">
+        <li class="menu-item menu-item-home">
+
+    <a href="/" rel="section"><i class="fa fa-fw fa-home"></i>Home</a>
+
+  </li>
+        <li class="menu-item menu-item-about">
+
+    <a href="/about/" rel="section"><i class="fa fa-fw fa-user"></i>About</a>
+
+  </li>
+        <li class="menu-item menu-item-tags">
+
+    <a href="/tags/" rel="section"><i class="fa fa-fw fa-tags"></i>Tags</a>
+
+  </li>
+        <li class="menu-item menu-item-categories">
+
+    <a href="/categories/" rel="section"><i class="fa fa-fw fa-th"></i>Categories</a>
+
+  </li>
+        <li class="menu-item menu-item-archives">
+
+    <a href="/archives/" rel="section"><i class="fa fa-fw fa-archive"></i>Archives</a>
+
+  </li>
+  </ul>
+
+</nav>
+</div>
+    </header>
+
+    
+  <div class="back-to-top">
+    <i class="fa fa-arrow-up"></i>
+    <span>0%</span>
+  </div>
+
+
+    <main class="main">
+      <div class="main-inner">
+        <div class="content-wrap">
+          
+
+          <div class="content">
+            
+
+  <div class="posts-expand">
+      
+  
+  
+  <article itemscope itemtype="http://schema.org/Article" class="post-block " lang="zh-Hans">
+    <link itemprop="mainEntityOfPage" href="http://luciusssss.github.io/2020/01/28/LeetCode%E5%88%B7%E9%A2%98%E7%AC%94%E8%AE%B0-2/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="image" content="/images/avatar.png">
+      <meta itemprop="name" content="Lucius">
+      <meta itemprop="description" content="Per aspera ad astra.">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="Blog - Lucius">
+    </span>
+      <header class="post-header">
+        <h1 class="post-title" itemprop="name headline">
+          LeetCode刷题笔记 2
+        </h1>
+
+        <div class="post-meta">
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              <span class="post-meta-item-text">Posted on</span>
+
+              <time title="Created: 2020-01-28 20:10:14" itemprop="dateCreated datePublished" datetime="2020-01-28T20:10:14+08:00">2020-01-28</time>
+            </span>
+              <span class="post-meta-item">
+                <span class="post-meta-item-icon">
+                  <i class="fa fa-calendar-check-o"></i>
+                </span>
+                <span class="post-meta-item-text">Edited on</span>
+                <time title="Modified: 2020-08-03 19:13:44" itemprop="dateModified" datetime="2020-08-03T19:13:44+08:00">2020-08-03</time>
+              </span>
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="fa fa-folder-o"></i>
+              </span>
+              <span class="post-meta-item-text">In</span>
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/%E7%AE%97%E6%B3%95/" itemprop="url" rel="index">
+                    <span itemprop="name">算法</span>
+                  </a>
+                </span>
+            </span>
+
+          
+  
+  <span class="post-meta-item">
+    
+      <span class="post-meta-item-icon">
+        <i class="fa fa-comment-o"></i>
+      </span>
+      <span class="post-meta-item-text">Disqus: </span>
+    
+    <a title="disqus" href="/2020/01/28/LeetCode%E5%88%B7%E9%A2%98%E7%AC%94%E8%AE%B0-2/#comments" itemprop="discussionUrl">
+      <span class="post-comments-count disqus-comment-count" data-disqus-identifier="2020/01/28/LeetCode刷题笔记-2/" itemprop="commentCount"></span>
+    </a>
+  </span>
+  
+  
+
+        </div>
+      </header>
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+        <p>开始刷Top 100 Liked Questions啦！（后50题）</p>
+<a id="more"></a>
+
+<h1 id="139-Word-Break"><a href="#139-Word-Break" class="headerlink" title="139. Word Break"></a>139. Word Break</h1><p>方法一：回溯，<strong>一定要加上记忆化</strong>。时间$O(n^2)$，空间$O(n)$。<br>方法二：BFS。对于每个开始的位置，搜索会直到给定字符串的尾部结束。复杂度同上。</p>
+<h1 id="141-Linked-List-Cycle"><a href="#141-Linked-List-Cycle" class="headerlink" title="141. Linked List Cycle"></a>141. Linked List Cycle</h1><p>双指针。时间$O(n)$，空间$O(1)$。注意快慢指针的初始化，两个都初始化成head了，然后<code>while(slow!=fast)</code>进不去。。。</p>
+<h1 id="142-Linked-List-Cycle-II-🌟"><a href="#142-Linked-List-Cycle-II-🌟" class="headerlink" title="142. Linked List Cycle II 🌟"></a>142. Linked List Cycle II 🌟</h1><p>指针相遇后让一个指针回<code>head</code>，然后两个指针都一步一步走直到相遇。</p>
+<h1 id="146-LRU-Cache-🌟"><a href="#146-LRU-Cache-🌟" class="headerlink" title="146. LRU Cache 🌟"></a>146. LRU Cache 🌟</h1><p>双向链表+哈希表。插入和查询都能$O(1)$。</p>
+<h1 id="148-Sort-List-🌟"><a href="#148-Sort-List-🌟" class="headerlink" title="148. Sort List 🌟"></a>148. Sort List 🌟</h1><p>解析：<a href="https://leetcode-cn.com/problems/sort-list/solution/148-pai-xu-lian-biao-bottom-to-up-o1-kong-jian-by-/" target="_blank" rel="noopener">https://leetcode-cn.com/problems/sort-list/solution/148-pai-xu-lian-biao-bottom-to-up-o1-kong-jian-by-/</a><br>使用自底向上的方法归并。使用cut和merge两个基本操作。链表题真是一不小心就会炸。。</p>
+<h1 id="152-Maximum-Product-Subarray-🌟"><a href="#152-Maximum-Product-Subarray-🌟" class="headerlink" title="152. Maximum Product Subarray 🌟"></a>152. Maximum Product Subarray 🌟</h1><p>因为可能存在乘积为负的情况，所以同时记录当前最大最小值，在<code>nums[i] &lt; 0</code>时交换最大最小值。</p>
+<figure class="highlight c++"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">int</span> ret = INT_MIN, imax = <span class="number">1</span>, imin = <span class="number">1</span>;</span><br><span class="line"><span class="keyword">for</span>(<span class="keyword">int</span> i = <span class="number">0</span>; i &lt; n; i++)&#123;</span><br><span class="line">    <span class="keyword">if</span> (nums[i] &lt; <span class="number">0</span>) swap(imax, imin);</span><br><span class="line">    imax = <span class="built_in">max</span>(imax*nums[i], nums[i]);</span><br><span class="line">    imin = <span class="built_in">min</span>(imin*nums[i], nums[i]);</span><br><span class="line">    ret = <span class="built_in">max</span>(ret, imax);</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<h1 id="155-Min-Stack"><a href="#155-Min-Stack" class="headerlink" title="155. Min Stack"></a>155. Min Stack</h1><p>两个辅助栈，<code>stackValue</code>和<code>stackMin</code>。push时，当加入的数字小于或等于<code>stackMin.top()</code>才加入<code>stackMin</code>。</p>
+<h1 id="160-Intersection-of-Two-Linked-Lists"><a href="#160-Intersection-of-Two-Linked-Lists" class="headerlink" title="160. Intersection of Two Linked Lists"></a>160. Intersection of Two Linked Lists</h1><p>双指针。先测两个链表长度，然后看最后是否到达同一个节点。然后两个指针回到链表头，链表较长的指针先走相差的步数，然后两个指针一起走，直到相遇在交点。</p>
+<h1 id="169-Majority-Element"><a href="#169-Majority-Element" class="headerlink" title="169. Majority Element"></a>169. Majority Element</h1><p>题目保证了一定Majority Element出现。<br>方法一：哈希表。时间$O(n)$，空间$O(n)$。<br>方法二：排序，然后取中位数。时间$O(n\log n)$，空间$O(1)$。</p>
+<h1 id="198-House-Robber"><a href="#198-House-Robber" class="headerlink" title="198. House Robber"></a>198. House Robber</h1><p>DP。<code>dp[i] = max(dp[i-2] + nums[i], dp[i-3]+nums[i])</code>。</p>
+<h1 id="200-Number-of-Islands"><a href="#200-Number-of-Islands" class="headerlink" title="200. Number of Islands"></a>200. Number of Islands</h1><p>DFS。</p>
+<h1 id="206-Reverse-Linked-List"><a href="#206-Reverse-Linked-List" class="headerlink" title="206. Reverse Linked List"></a>206. Reverse Linked List</h1><p>递归：时间$O(n)$，空间$O(n)$。<br>迭代：时间$O(n)$，空间$O(1)$。</p>
+<figure class="highlight c++"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br></pre></td><td class="code"><pre><span class="line"><span class="function">ListNode* <span class="title">reverseList</span><span class="params">(ListNode* head)</span> </span>&#123;</span><br><span class="line">    ListNode *prev = <span class="literal">nullptr</span>;</span><br><span class="line">    ListNode *cur = head;</span><br><span class="line">    <span class="keyword">while</span> (cur)</span><br><span class="line">    &#123;</span><br><span class="line">        ListNode *next = cur-&gt;next;</span><br><span class="line">        cur-&gt;next = prev;</span><br><span class="line">        prev = cur, cur = next;</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="keyword">return</span> prev;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<h1 id="207-Course-Schedule"><a href="#207-Course-Schedule" class="headerlink" title="207. Course Schedule"></a>207. Course Schedule</h1><p>拓扑排序，BFS。时间$O(m+n)$。</p>
+<h1 id="208-Implement-Trie-Prefix-Tree"><a href="#208-Implement-Trie-Prefix-Tree" class="headerlink" title="208. Implement Trie (Prefix Tree)"></a>208. Implement Trie (Prefix Tree)</h1><h1 id="215-Kth-Largest-Element-in-an-Array"><a href="#215-Kth-Largest-Element-in-an-Array" class="headerlink" title="215. Kth Largest Element in an Array"></a>215. Kth Largest Element in an Array</h1><p>方法一：堆。时间$O(n\log k)$，空间$O(k)$。<br>方法二：快排。时间平均$O(n)$，最坏$O(n^2)$，空间$O(n)$。</p>
+<h1 id="221-Maximal-Square-🌟"><a href="#221-Maximal-Square-🌟" class="headerlink" title="221. Maximal Square 🌟"></a>221. Maximal Square 🌟</h1><p>方法一：DP。<code>if(matrix[i][j] == &#39;1&#39;) dp[i][j] = min(dp[i-1][j-1], dp[i-1][j], dp[i][j-1]) + 1</code>。时间$O(nm))$，空间可以压缩到$O(m)$。<br>方法二：栈。类似84，84。复杂度同上。</p>
+<h1 id="226-Invert-Binary-Tree"><a href="#226-Invert-Binary-Tree" class="headerlink" title="226. Invert Binary Tree"></a>226. Invert Binary Tree</h1><figure class="highlight c++"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line"><span class="function">TreeNode* <span class="title">invertTree</span><span class="params">(TreeNode* root)</span> </span>&#123;</span><br><span class="line">    <span class="keyword">if</span> (root == <span class="literal">NULL</span>) <span class="keyword">return</span> <span class="literal">NULL</span>;</span><br><span class="line">    TreeNode* left = invertTree(root-&gt;left);</span><br><span class="line">    TreeNode* right = invertTree(root-&gt;right);</span><br><span class="line">    root-&gt;left = right;</span><br><span class="line">    root-&gt;right = left;</span><br><span class="line">    <span class="keyword">return</span> root;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<h1 id="234-Palindrome-Linked-List"><a href="#234-Palindrome-Linked-List" class="headerlink" title="234. Palindrome Linked List"></a>234. Palindrome Linked List</h1><p>方法一：复制到一个数组里再判断。时间$O(n)$，空间$O(n)$。<br>方法二：从中间切开，把后一半反转（见206），再逐一比较。时间$O(n)$，空间$O(1)$。</p>
+<h1 id="236-Lowest-Common-Ancestor-of-a-Binary-Tree-🌟"><a href="#236-Lowest-Common-Ancestor-of-a-Binary-Tree-🌟" class="headerlink" title="236. Lowest Common Ancestor of a Binary Tree 🌟"></a>236. Lowest Common Ancestor of a Binary Tree 🌟</h1><p>递归，DFS。时间$O(n)$，空间$O(n)$。</p>
+<figure class="highlight c++"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></td><td class="code"><pre><span class="line"><span class="function">TreeNode* <span class="title">lowestCommonAncestor</span><span class="params">(TreeNode* root, TreeNode* p, TreeNode* q)</span> </span>&#123;</span><br><span class="line">    <span class="keyword">if</span> (root == <span class="literal">NULL</span>) <span class="keyword">return</span> <span class="literal">NULL</span>;</span><br><span class="line">    <span class="keyword">if</span> (root-&gt;val == p-&gt;val || root-&gt;val == q-&gt;val) <span class="keyword">return</span> root;</span><br><span class="line">    TreeNode* left = lowestCommonAncestor(root-&gt;left, p, q);</span><br><span class="line">    TreeNode* right = lowestCommonAncestor(root-&gt;right, p, q);</span><br><span class="line">    <span class="keyword">if</span> (left &amp;&amp; right) <span class="keyword">return</span> root;</span><br><span class="line">    <span class="keyword">else</span> <span class="keyword">if</span> (left) <span class="keyword">return</span> left;</span><br><span class="line">    <span class="keyword">else</span> <span class="keyword">if</span> (right) <span class="keyword">return</span> right;</span><br><span class="line">    <span class="keyword">return</span> <span class="literal">NULL</span>;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<h1 id="238-Product-of-Array-Except-Self-🌟"><a href="#238-Product-of-Array-Except-Self-🌟" class="headerlink" title="238. Product of Array Except Self 🌟"></a>238. Product of Array Except Self 🌟</h1><p>左右累乘。时间$O(n)$，空间$O(1)$（如果不算返回的数组）。</p>
+<h1 id="239-Sliding-Window-Maximum-🌟"><a href="#239-Sliding-Window-Maximum-🌟" class="headerlink" title="239. Sliding Window Maximum 🌟"></a>239. Sliding Window Maximum 🌟</h1><p>双端队列。时间$O(n)$。deque种元素递减。更新时，先检查合法性，再检查单调性。</p>
+<figure class="highlight c++"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">for</span>(<span class="keyword">int</span> i = <span class="number">0</span>; i &lt; n; i++)&#123;</span><br><span class="line">    <span class="keyword">while</span> (!q.empty() &amp;&amp; i - q.front() &gt;= k)</span><br><span class="line">        q.pop_front();</span><br><span class="line">    <span class="keyword">while</span> (!q.empty() &amp;&amp; nums[i] &gt;= nums[q.back()])</span><br><span class="line">        q.pop_back();</span><br><span class="line">    q.push_back(i);</span><br><span class="line">    <span class="keyword">if</span>(i &gt;= k<span class="number">-1</span>) ret.push_back(nums[q.front()]);</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<p>如果用堆的话，在大小为k的堆里插入元素时间为$O(\log k)$，所以总时间为$O(n\log k)$。</p>
+<h1 id="240-Search-a-2D-Matrix-II-🌟"><a href="#240-Search-a-2D-Matrix-II-🌟" class="headerlink" title="240. Search a 2D Matrix II 🌟"></a>240. Search a 2D Matrix II 🌟</h1><p>从右上角开始往左往右移动。时间$O(m+n)$。</p>
+<h1 id="279-Perfect-Squares-🌟"><a href="#279-Perfect-Squares-🌟" class="headerlink" title="279. Perfect Squares 🌟"></a>279. Perfect Squares 🌟</h1><p>BFS/DP。时间$O(n\sqrt{n})$</p>
+<h1 id="283-Move-Zeroes-🌟"><a href="#283-Move-Zeroes-🌟" class="headerlink" title="283. Move Zeroes 🌟"></a>283. Move Zeroes 🌟</h1><figure class="highlight c++"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">int</span> i = <span class="number">0</span>;</span><br><span class="line"><span class="keyword">for</span>(<span class="keyword">int</span> j = <span class="number">0</span>; j &lt; nums.<span class="built_in">size</span>(); j++)</span><br><span class="line">    <span class="keyword">if</span>(nums[j] != <span class="number">0</span>) nums[i++] = nums[j];</span><br><span class="line"><span class="keyword">for</span>(; i &lt; nums.<span class="built_in">size</span>(); i++) nums[i] = <span class="number">0</span>;</span><br></pre></td></tr></table></figure>
+
+<h1 id="287-Find-the-Duplicate-Number-🌟"><a href="#287-Find-the-Duplicate-Number-🌟" class="headerlink" title="287. Find the Duplicate Number 🌟"></a>287. Find the Duplicate Number 🌟</h1><p>转换成142处理。<code>i</code>表示<code>Node*</code>，指向的节点的<code>val</code>和<code>next</code>都是<code>nums[i]</code>。</p>
+<h1 id="297-Serialize-and-Deserialize-Binary-Tree-🌟"><a href="#297-Serialize-and-Deserialize-Binary-Tree-🌟" class="headerlink" title="297. Serialize and Deserialize Binary Tree 🌟"></a>297. Serialize and Deserialize Binary Tree 🌟</h1><p>可以DFS（先序遍历）和BFS（层次遍历）。注意stringstream的用法。在遇到NULL时，在字符串中加#。<br>题解：<a href="https://leetcode-cn.com/problems/serialize-and-deserialize-binary-tree/solution/liang-chong-jie-fa-by-jason-2-13/" target="_blank" rel="noopener">https://leetcode-cn.com/problems/serialize-and-deserialize-binary-tree/solution/liang-chong-jie-fa-by-jason-2-13/</a></p>
+<h1 id="300-Longest-Increasing-Subsequence-🌟"><a href="#300-Longest-Increasing-Subsequence-🌟" class="headerlink" title="300. Longest Increasing Subsequence 🌟"></a>300. Longest Increasing Subsequence 🌟</h1><p>传统DP，时间$O(n^2)$。能够优化到到$O(n\log n)$。使用一个数组来记录长度为$i$的上升子序列最后一位数最小能到多少。<br><a href="https://www.acwing.com/solution/LeetCode/content/287/" target="_blank" rel="noopener">https://www.acwing.com/solution/LeetCode/content/287/</a></p>
+<h1 id="301-Remove-Invalid-Parentheses"><a href="#301-Remove-Invalid-Parentheses" class="headerlink" title="301. Remove Invalid Parentheses"></a>301. Remove Invalid Parentheses</h1><p>回溯。先确定要删除多少左右括号，再进行回溯，注意合法性剪枝。时间$O(2^n)$。<br>确定删除多少左右括号的代码为：</p>
+<figure class="highlight c++"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">for</span> (<span class="keyword">char</span> c : s)&#123;</span><br><span class="line">    <span class="keyword">if</span> (c == <span class="string">'('</span>)</span><br><span class="line">        leftRemove++;</span><br><span class="line">    <span class="keyword">else</span> <span class="keyword">if</span> (c == <span class="string">')'</span>)&#123;</span><br><span class="line">        <span class="keyword">if</span> (leftRemove == <span class="number">0</span>) rightRemove++;</span><br><span class="line">        <span class="keyword">else</span> leftRemove--;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<h1 id="309-Best-Time-to-Buy-and-Sell-Stock-with-Cooldown"><a href="#309-Best-Time-to-Buy-and-Sell-Stock-with-Cooldown" class="headerlink" title="309. Best Time to Buy and Sell Stock with Cooldown"></a>309. Best Time to Buy and Sell Stock with Cooldown</h1><p>DP，<code>hold</code>和<code>unhold</code>分别表示当天持有还是不持有股票。时间$O(n)$，空间$O(n)$，可以进一步压缩到$O(1)$。</p>
+<figure class="highlight c++"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line">hold[<span class="number">0</span>] = -prices[<span class="number">0</span>];</span><br><span class="line"><span class="keyword">for</span>(<span class="keyword">int</span> i = <span class="number">1</span>; i &lt; n; i++)&#123;</span><br><span class="line">    unhold[i] = <span class="built_in">max</span>(hold[i<span class="number">-1</span>] + prices[i], unhold[i<span class="number">-1</span>]);</span><br><span class="line">    <span class="keyword">if</span> (i == <span class="number">1</span>)</span><br><span class="line">        hold[i] = <span class="built_in">max</span>(hold[i<span class="number">-1</span>], - prices[i]);</span><br><span class="line">    <span class="keyword">else</span></span><br><span class="line">        hold[i] = <span class="built_in">max</span>(hold[i<span class="number">-1</span>], unhold[i<span class="number">-2</span>] - prices[i]);</span><br><span class="line">&#125;</span><br><span class="line"><span class="keyword">return</span> unhold[n<span class="number">-1</span>];</span><br></pre></td></tr></table></figure>
+<p>一个团灭所有的股票买卖问题的帖子：<a href="https://leetcode.com/problems/best-time-to-buy-and-sell-stock-with-transaction-fee/discuss/108870/Most-consistent-ways-of-dealing-with-the-series-of-stock-problems" target="_blank" rel="noopener">https://leetcode.com/problems/best-time-to-buy-and-sell-stock-with-transaction-fee/discuss/108870/Most-consistent-ways-of-dealing-with-the-series-of-stock-problems</a></p>
+<h1 id="312-Burst-Balloons-🌟"><a href="#312-Burst-Balloons-🌟" class="headerlink" title="312. Burst Balloons 🌟"></a>312. Burst Balloons 🌟</h1><p>解析：<a href="https://www.acwing.com/solution/LeetCode/content/297/" target="_blank" rel="noopener">https://www.acwing.com/solution/LeetCode/content/297/</a></p>
+<figure class="highlight c++"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">for</span>(<span class="keyword">int</span> len = <span class="number">1</span>; len &lt;= n; len++)</span><br><span class="line">    <span class="keyword">for</span>(<span class="keyword">int</span> i = <span class="number">1</span>; i &lt;= n - len + <span class="number">1</span>; i++)&#123;</span><br><span class="line">        <span class="keyword">int</span> j = i + len <span class="number">-1</span>;</span><br><span class="line">        <span class="keyword">for</span>(<span class="keyword">int</span> k = i; k &lt;= j; k++)</span><br><span class="line">            dp[i][j] = <span class="built_in">max</span>(dp[i][j], dp[i][k<span class="number">-1</span>] + nums[i<span class="number">-1</span>]*nums[k]*nums[j+<span class="number">1</span>] + dp[k+<span class="number">1</span>][j]);                </span><br><span class="line">    &#125;</span><br></pre></td></tr></table></figure>
+
+<h1 id="322-Coin-Change"><a href="#322-Coin-Change" class="headerlink" title="322. Coin Change"></a>322. Coin Change</h1><p>DP。时间$O(mn)$。</p>
+<h1 id="337-House-Robber-III-🌟"><a href="#337-House-Robber-III-🌟" class="headerlink" title="337. House Robber III 🌟"></a>337. House Robber III 🌟</h1><figure class="highlight c++"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br></pre></td><td class="code"><pre><span class="line"><span class="built_in">vector</span>&lt;<span class="keyword">int</span>&gt; dfs(TreeNode* root)&#123;</span><br><span class="line">    <span class="keyword">if</span>(!root) &#123;</span><br><span class="line">        <span class="keyword">return</span> <span class="built_in">vector</span>&lt;<span class="keyword">int</span>&gt;(<span class="number">2</span>, <span class="number">0</span>);</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="built_in">vector</span>&lt;<span class="keyword">int</span>&gt; left = dfs(root-&gt;left);</span><br><span class="line">    <span class="built_in">vector</span>&lt;<span class="keyword">int</span>&gt; right = dfs(root-&gt;right);</span><br><span class="line">    <span class="built_in">vector</span>&lt;<span class="keyword">int</span>&gt; ret(<span class="number">2</span>, <span class="number">0</span>);</span><br><span class="line">    ret[<span class="number">0</span>] = <span class="built_in">max</span>(left[<span class="number">0</span>], left[<span class="number">1</span>]) + <span class="built_in">max</span>(right[<span class="number">0</span>], right[<span class="number">1</span>]);</span><br><span class="line">    ret[<span class="number">1</span>] = root-&gt;val + left[<span class="number">0</span>] + right[<span class="number">0</span>];</span><br><span class="line">    <span class="keyword">return</span> ret;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<h1 id="338-Counting-Bits"><a href="#338-Counting-Bits" class="headerlink" title="338. Counting Bits"></a>338. Counting Bits</h1><p>偶数的popcount等于它除以二结果的popcount，奇数的popcount等于比它小1的偶数的popcount加一。</p>
+<h1 id="347-Top-K-Frequent-Elements"><a href="#347-Top-K-Frequent-Elements" class="headerlink" title="347. Top K Frequent Elements"></a>347. Top K Frequent Elements</h1><p>用哈希表维护元素出现频率，用优先队列选出最大的几个。时间$O(n + k\log n)$</p>
+<h1 id="394-Decode-String-🌟"><a href="#394-Decode-String-🌟" class="headerlink" title="394. Decode String 🌟"></a>394. Decode String 🌟</h1><p>栈。时间空间都是$O(n)$。<br><a href="https://leetcode-cn.com/problems/decode-string/solution/decode-string-fu-zhu-zhan-fa-di-gui-fa-by-jyd/" target="_blank" rel="noopener">https://leetcode-cn.com/problems/decode-string/solution/decode-string-fu-zhu-zhan-fa-di-gui-fa-by-jyd/</a></p>
+<h1 id="399-Evaluate-Division"><a href="#399-Evaluate-Division" class="headerlink" title="399. Evaluate Division"></a>399. Evaluate Division</h1><p>将除数被除数当作节点，进行BFS。</p>
+<h1 id="406-Queue-Reconstruction-by-Height-🌟"><a href="#406-Queue-Reconstruction-by-Height-🌟" class="headerlink" title="406. Queue Reconstruction by Height 🌟"></a>406. Queue Reconstruction by Height 🌟</h1><p>先按$h$从高到低排，内部再按$k$从小到大排，再逐个插入新建的返回队列中。时间$O(n^2$。</p>
+<h1 id="416-Partition-Equal-Subset-Sum"><a href="#416-Partition-Equal-Subset-Sum" class="headerlink" title="416. Partition Equal Subset Sum"></a>416. Partition Equal Subset Sum</h1><p>转换成01背包，数组里存的是bool。</p>
+<h1 id="437-Path-Sum-III-🌟"><a href="#437-Path-Sum-III-🌟" class="headerlink" title="437. Path Sum III 🌟"></a>437. Path Sum III 🌟</h1><p>DFS。注意存下根节点到路径上距离为一定值的点个数。每次到一个点，检查路径上与它相差<code>sum</code>的点的个数。时间空间都是$O(n)$。</p>
+<h1 id="438-Find-All-Anagrams-in-a-String-🌟"><a href="#438-Find-All-Anagrams-in-a-String-🌟" class="headerlink" title="438. Find All Anagrams in a String 🌟"></a>438. Find All Anagrams in a String 🌟</h1><p>滑动窗口，类似方法可以做3和76。时间$O(n)$。</p>
+<figure class="highlight c++"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">for</span>(<span class="keyword">int</span> i = <span class="number">0</span>, j = <span class="number">0</span>, c = <span class="number">0</span>; i &lt; s.<span class="built_in">size</span>(); i++)&#123;</span><br><span class="line">    <span class="keyword">if</span>(need.<span class="built_in">find</span>(s[i]) != need.<span class="built_in">end</span>()) &#123;</span><br><span class="line">        window[s[i]]++;</span><br><span class="line">        <span class="keyword">if</span> (window[s[i]] == need[s[i]]) c++;</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="keyword">while</span>(c == need.<span class="built_in">size</span>())&#123;</span><br><span class="line">        <span class="keyword">if</span> (i - j + <span class="number">1</span> == p.<span class="built_in">size</span>()) ret.push_back(j);</span><br><span class="line">        <span class="keyword">if</span>(need.<span class="built_in">find</span>(s[j]) != need.<span class="built_in">end</span>())&#123;</span><br><span class="line">            window[s[j]]--;</span><br><span class="line">            <span class="keyword">if</span> (window[s[j]] &lt; need[s[j]]) c--;</span><br><span class="line">        &#125;</span><br><span class="line">        j++;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<h1 id="448-Find-All-Numbers-Disappeared-in-an-Array"><a href="#448-Find-All-Numbers-Disappeared-in-an-Array" class="headerlink" title="448. Find All Numbers Disappeared in an Array"></a>448. Find All Numbers Disappeared in an Array</h1><p>数组内调换，将对应数放到对应的位置上，类似41。时间$O(n)$，空间$O(1)$。</p>
+<figure class="highlight c++"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">for</span>(<span class="keyword">int</span> i = <span class="number">0</span>; i &lt; n; i++)&#123;</span><br><span class="line">    <span class="keyword">while</span> (nums[nums[i]<span class="number">-1</span>] != nums[i])&#123;</span><br><span class="line">        swap(nums[i], nums[nums[i]<span class="number">-1</span>]);</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br><span class="line"><span class="keyword">for</span> (<span class="keyword">int</span> i = <span class="number">0</span>; i &lt; n; i++)&#123;</span><br><span class="line">    <span class="keyword">if</span> (nums[i] != i + <span class="number">1</span>)</span><br><span class="line">        ret.push_back(i+<span class="number">1</span>);</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<h1 id="461-Hamming-Distance"><a href="#461-Hamming-Distance" class="headerlink" title="461. Hamming Distance"></a>461. Hamming Distance</h1><h1 id="494-Target-Sum-🌟"><a href="#494-Target-Sum-🌟" class="headerlink" title="494. Target Sum 🌟"></a>494. Target Sum 🌟</h1><p>类似416，转换成01背包。时间$O(n * {sum})$，空间$O(sum)$。</p>
+<h1 id="538-Convert-BST-to-Greater-Tree"><a href="#538-Convert-BST-to-Greater-Tree" class="headerlink" title="538. Convert BST to Greater Tree"></a>538. Convert BST to Greater Tree</h1><p>累加递归。时间$O(n)$。</p>
+<figure class="highlight c++"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">int</span> sum = <span class="number">0</span>;</span><br><span class="line"><span class="function">TreeNode* <span class="title">convertBST</span><span class="params">(TreeNode* root)</span> </span>&#123;</span><br><span class="line">    <span class="keyword">if</span> (!root) <span class="keyword">return</span> <span class="literal">NULL</span>;</span><br><span class="line">    convertBST(root-&gt;right);</span><br><span class="line">    root-&gt;val += sum;</span><br><span class="line">    sum = root-&gt;val;</span><br><span class="line">    convertBST(root-&gt;left);</span><br><span class="line">    <span class="keyword">return</span> root;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<h1 id="543-Diameter-of-Binary-Tree-🌟"><a href="#543-Diameter-of-Binary-Tree-🌟" class="headerlink" title="543. Diameter of Binary Tree 🌟"></a>543. Diameter of Binary Tree 🌟</h1><p>在求树的深度时，同时求直径。</p>
+<figure class="highlight c++"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">int</span> maxPath = <span class="number">0</span>;</span><br><span class="line"><span class="function"><span class="keyword">int</span> <span class="title">diameterOfBinaryTree</span><span class="params">(TreeNode* root)</span> </span>&#123;</span><br><span class="line">    dfs(root);</span><br><span class="line">    <span class="keyword">return</span> maxPath;</span><br><span class="line">&#125;</span><br><span class="line"><span class="function"><span class="keyword">int</span> <span class="title">dfs</span><span class="params">(TreeNode* root)</span></span>&#123;</span><br><span class="line">    <span class="keyword">if</span> (!root) <span class="keyword">return</span> <span class="number">-1</span>;</span><br><span class="line">    <span class="keyword">int</span> left = dfs(root-&gt;left);</span><br><span class="line">    <span class="keyword">int</span> right = dfs(root-&gt;right);</span><br><span class="line">    maxPath = <span class="built_in">max</span>(maxPath, left + right + <span class="number">2</span>);</span><br><span class="line">    <span class="keyword">return</span> <span class="built_in">max</span>(left, right) + <span class="number">1</span>;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<h1 id="560-Subarray-Sum-Equals-K-🌟"><a href="#560-Subarray-Sum-Equals-K-🌟" class="headerlink" title="560. Subarray Sum Equals K 🌟"></a>560. Subarray Sum Equals K 🌟</h1><p>累加+哈希。时间空间都是$O(n)$。</p>
+<h1 id="581-Shortest-Unsorted-Continuous-Subarray"><a href="#581-Shortest-Unsorted-Continuous-Subarray" class="headerlink" title="581. Shortest Unsorted Continuous Subarray"></a>581. Shortest Unsorted Continuous Subarray</h1><p>寻找数组中间降序的最低的元素，然后把用这个极值确定左边排好了的范围。右边同理。时间$O(n)$，空间$O(1)$。</p>
+<h1 id="617-Merge-Two-Binary-Trees"><a href="#617-Merge-Two-Binary-Trees" class="headerlink" title="617. Merge Two Binary Trees"></a>617. Merge Two Binary Trees</h1><h1 id="621-Task-Scheduler-🌟"><a href="#621-Task-Scheduler-🌟" class="headerlink" title="621. Task Scheduler 🌟"></a>621. Task Scheduler 🌟</h1><p>直接设计。。。<a href="https://leetcode-cn.com/problems/task-scheduler/solution/ren-wu-diao-du-qi-by-leetcode/" target="_blank" rel="noopener">https://leetcode-cn.com/problems/task-scheduler/solution/ren-wu-diao-du-qi-by-leetcode/</a></p>
+<h1 id="647-Palindromic-Substrings"><a href="#647-Palindromic-Substrings" class="headerlink" title="647. Palindromic Substrings"></a>647. Palindromic Substrings</h1><p>中心扩展。时间$O(n^2)$，空间$O(1)$。</p>
+<h1 id="739-Daily-Temperatures"><a href="#739-Daily-Temperatures" class="headerlink" title="739. Daily Temperatures"></a>739. Daily Temperatures</h1><p>栈。时间$O(n)$，空间$O(n)$。</p>
+<figure class="highlight c++"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">for</span>(<span class="keyword">int</span> i = <span class="number">0</span>; i &lt; n; i++)&#123;</span><br><span class="line">    <span class="keyword">while</span>(!st.empty() &amp;&amp; T[i] &gt; T[st.top()])&#123;</span><br><span class="line">        <span class="keyword">int</span> top = st.top();</span><br><span class="line">        st.pop();</span><br><span class="line">        res[top] = i - top;</span><br><span class="line">    &#125;</span><br><span class="line">    st.push(i);</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+    </div>
+
+    
+    
+    
+
+      <footer class="post-footer">
+          <div class="post-tags">
+              <a href="/tags/LeetCode/" rel="tag"># LeetCode</a>
+              <a href="/tags/%E7%AE%97%E6%B3%95/" rel="tag"># 算法</a>
+          </div>
+
+        
+
+
+        
+    <div class="post-nav">
+      <div class="post-nav-item">
+    <a href="/2020/01/20/LeetCode%E5%88%B7%E9%A2%98%E7%AC%94%E8%AE%B0-1/" rel="prev" title="LeetCode刷题笔记 1">
+      <i class="fa fa-chevron-left"></i> LeetCode刷题笔记 1
+    </a></div>
+      <div class="post-nav-item">
+    <a href="/2020/02/06/LeetCode%E8%B4%AA%E5%BF%83%E4%B8%93%E9%A2%98/" rel="next" title="LeetCode贪心专题">
+      LeetCode贪心专题 <i class="fa fa-chevron-right"></i>
+    </a></div>
+    </div>
+      </footer>
+    
+  </article>
+  
+  
+  
+
+  </div>
+
+
+          </div>
+          
+    
+  <div class="comments">
+    <div id="disqus_thread">
+      <noscript>Please enable JavaScript to view the comments powered by Disqus.</noscript>
+    </div>
+  </div>
+  
+
+<script>
+  window.addEventListener('tabs:register', () => {
+    let activeClass = CONFIG.comments.activeClass;
+    if (CONFIG.comments.storage) {
+      activeClass = localStorage.getItem('comments_active') || activeClass;
+    }
+    if (activeClass) {
+      let activeTab = document.querySelector(`a[href="#comment-${activeClass}"]`);
+      if (activeTab) {
+        activeTab.click();
+      }
+    }
+  });
+  if (CONFIG.comments.storage) {
+    window.addEventListener('tabs:click', event => {
+      if (!event.target.matches('.tabs-comment .tab-content .tab-pane')) return;
+      let commentClass = event.target.classList[1];
+      localStorage.setItem('comments_active', commentClass);
+    });
+  }
+</script>
+
+        </div>
+          
+  
+  <div class="toggle sidebar-toggle">
+    <span class="toggle-line toggle-line-first"></span>
+    <span class="toggle-line toggle-line-middle"></span>
+    <span class="toggle-line toggle-line-last"></span>
+  </div>
+
+  <aside class="sidebar">
+    <div class="sidebar-inner">
+
+      <ul class="sidebar-nav motion-element">
+        <li class="sidebar-nav-toc">
+          Table of Contents
+        </li>
+        <li class="sidebar-nav-overview">
+          Overview
+        </li>
+      </ul>
+
+      <!--noindex-->
+      <div class="post-toc-wrap sidebar-panel">
+          <div class="post-toc motion-element"><ol class="nav"><li class="nav-item nav-level-1"><a class="nav-link" href="#139-Word-Break"><span class="nav-number">1.</span> <span class="nav-text">139. Word Break</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#141-Linked-List-Cycle"><span class="nav-number">2.</span> <span class="nav-text">141. Linked List Cycle</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#142-Linked-List-Cycle-II-🌟"><span class="nav-number">3.</span> <span class="nav-text">142. Linked List Cycle II 🌟</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#146-LRU-Cache-🌟"><span class="nav-number">4.</span> <span class="nav-text">146. LRU Cache 🌟</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#148-Sort-List-🌟"><span class="nav-number">5.</span> <span class="nav-text">148. Sort List 🌟</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#152-Maximum-Product-Subarray-🌟"><span class="nav-number">6.</span> <span class="nav-text">152. Maximum Product Subarray 🌟</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#155-Min-Stack"><span class="nav-number">7.</span> <span class="nav-text">155. Min Stack</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#160-Intersection-of-Two-Linked-Lists"><span class="nav-number">8.</span> <span class="nav-text">160. Intersection of Two Linked Lists</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#169-Majority-Element"><span class="nav-number">9.</span> <span class="nav-text">169. Majority Element</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#198-House-Robber"><span class="nav-number">10.</span> <span class="nav-text">198. House Robber</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#200-Number-of-Islands"><span class="nav-number">11.</span> <span class="nav-text">200. Number of Islands</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#206-Reverse-Linked-List"><span class="nav-number">12.</span> <span class="nav-text">206. Reverse Linked List</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#207-Course-Schedule"><span class="nav-number">13.</span> <span class="nav-text">207. Course Schedule</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#208-Implement-Trie-Prefix-Tree"><span class="nav-number">14.</span> <span class="nav-text">208. Implement Trie (Prefix Tree)</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#215-Kth-Largest-Element-in-an-Array"><span class="nav-number">15.</span> <span class="nav-text">215. Kth Largest Element in an Array</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#221-Maximal-Square-🌟"><span class="nav-number">16.</span> <span class="nav-text">221. Maximal Square 🌟</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#226-Invert-Binary-Tree"><span class="nav-number">17.</span> <span class="nav-text">226. Invert Binary Tree</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#234-Palindrome-Linked-List"><span class="nav-number">18.</span> <span class="nav-text">234. Palindrome Linked List</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#236-Lowest-Common-Ancestor-of-a-Binary-Tree-🌟"><span class="nav-number">19.</span> <span class="nav-text">236. Lowest Common Ancestor of a Binary Tree 🌟</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#238-Product-of-Array-Except-Self-🌟"><span class="nav-number">20.</span> <span class="nav-text">238. Product of Array Except Self 🌟</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#239-Sliding-Window-Maximum-🌟"><span class="nav-number">21.</span> <span class="nav-text">239. Sliding Window Maximum 🌟</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#240-Search-a-2D-Matrix-II-🌟"><span class="nav-number">22.</span> <span class="nav-text">240. Search a 2D Matrix II 🌟</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#279-Perfect-Squares-🌟"><span class="nav-number">23.</span> <span class="nav-text">279. Perfect Squares 🌟</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#283-Move-Zeroes-🌟"><span class="nav-number">24.</span> <span class="nav-text">283. Move Zeroes 🌟</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#287-Find-the-Duplicate-Number-🌟"><span class="nav-number">25.</span> <span class="nav-text">287. Find the Duplicate Number 🌟</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#297-Serialize-and-Deserialize-Binary-Tree-🌟"><span class="nav-number">26.</span> <span class="nav-text">297. Serialize and Deserialize Binary Tree 🌟</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#300-Longest-Increasing-Subsequence-🌟"><span class="nav-number">27.</span> <span class="nav-text">300. Longest Increasing Subsequence 🌟</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#301-Remove-Invalid-Parentheses"><span class="nav-number">28.</span> <span class="nav-text">301. Remove Invalid Parentheses</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#309-Best-Time-to-Buy-and-Sell-Stock-with-Cooldown"><span class="nav-number">29.</span> <span class="nav-text">309. Best Time to Buy and Sell Stock with Cooldown</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#312-Burst-Balloons-🌟"><span class="nav-number">30.</span> <span class="nav-text">312. Burst Balloons 🌟</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#322-Coin-Change"><span class="nav-number">31.</span> <span class="nav-text">322. Coin Change</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#337-House-Robber-III-🌟"><span class="nav-number">32.</span> <span class="nav-text">337. House Robber III 🌟</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#338-Counting-Bits"><span class="nav-number">33.</span> <span class="nav-text">338. Counting Bits</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#347-Top-K-Frequent-Elements"><span class="nav-number">34.</span> <span class="nav-text">347. Top K Frequent Elements</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#394-Decode-String-🌟"><span class="nav-number">35.</span> <span class="nav-text">394. Decode String 🌟</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#399-Evaluate-Division"><span class="nav-number">36.</span> <span class="nav-text">399. Evaluate Division</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#406-Queue-Reconstruction-by-Height-🌟"><span class="nav-number">37.</span> <span class="nav-text">406. Queue Reconstruction by Height 🌟</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#416-Partition-Equal-Subset-Sum"><span class="nav-number">38.</span> <span class="nav-text">416. Partition Equal Subset Sum</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#437-Path-Sum-III-🌟"><span class="nav-number">39.</span> <span class="nav-text">437. Path Sum III 🌟</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#438-Find-All-Anagrams-in-a-String-🌟"><span class="nav-number">40.</span> <span class="nav-text">438. Find All Anagrams in a String 🌟</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#448-Find-All-Numbers-Disappeared-in-an-Array"><span class="nav-number">41.</span> <span class="nav-text">448. Find All Numbers Disappeared in an Array</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#461-Hamming-Distance"><span class="nav-number">42.</span> <span class="nav-text">461. Hamming Distance</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#494-Target-Sum-🌟"><span class="nav-number">43.</span> <span class="nav-text">494. Target Sum 🌟</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#538-Convert-BST-to-Greater-Tree"><span class="nav-number">44.</span> <span class="nav-text">538. Convert BST to Greater Tree</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#543-Diameter-of-Binary-Tree-🌟"><span class="nav-number">45.</span> <span class="nav-text">543. Diameter of Binary Tree 🌟</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#560-Subarray-Sum-Equals-K-🌟"><span class="nav-number">46.</span> <span class="nav-text">560. Subarray Sum Equals K 🌟</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#581-Shortest-Unsorted-Continuous-Subarray"><span class="nav-number">47.</span> <span class="nav-text">581. Shortest Unsorted Continuous Subarray</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#617-Merge-Two-Binary-Trees"><span class="nav-number">48.</span> <span class="nav-text">617. Merge Two Binary Trees</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#621-Task-Scheduler-🌟"><span class="nav-number">49.</span> <span class="nav-text">621. Task Scheduler 🌟</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#647-Palindromic-Substrings"><span class="nav-number">50.</span> <span class="nav-text">647. Palindromic Substrings</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#739-Daily-Temperatures"><span class="nav-number">51.</span> <span class="nav-text">739. Daily Temperatures</span></a></li></ol></div>
+      </div>
+      <!--/noindex-->
+
+      <div class="site-overview-wrap sidebar-panel">
+        <div class="site-author motion-element" itemprop="author" itemscope itemtype="http://schema.org/Person">
+    <img class="site-author-image" itemprop="image" alt="Lucius"
+      src="/images/avatar.png">
+  <p class="site-author-name" itemprop="name">Lucius</p>
+  <div class="site-description" itemprop="description">Per aspera ad astra.</div>
+</div>
+<div class="site-state-wrap motion-element">
+  <nav class="site-state">
+      <div class="site-state-item site-state-posts">
+          <a href="/archives/">
+        
+          <span class="site-state-item-count">11</span>
+          <span class="site-state-item-name">posts</span>
+        </a>
+      </div>
+      <div class="site-state-item site-state-categories">
+            <a href="/categories/">
+          
+        <span class="site-state-item-count">4</span>
+        <span class="site-state-item-name">categories</span></a>
+      </div>
+      <div class="site-state-item site-state-tags">
+            <a href="/tags/">
+          
+        <span class="site-state-item-count">12</span>
+        <span class="site-state-item-name">tags</span></a>
+      </div>
+  </nav>
+</div>
+  <div class="links-of-author motion-element">
+      <span class="links-of-author-item">
+        <a href="https://github.com/luciusssss" title="GitHub → https:&#x2F;&#x2F;github.com&#x2F;luciusssss" rel="noopener" target="_blank"><i class="fa fa-fw fa-github"></i>GitHub</a>
+      </span>
+      <span class="links-of-author-item">
+        <a href="mailto:zhangch@pku.edu.cn" title="E-Mail → mailto:zhangch@pku.edu.cn" rel="noopener" target="_blank"><i class="fa fa-fw fa-envelope"></i>E-Mail</a>
+      </span>
+  </div>
+
+
+
+      </div>
+
+    </div>
+  </aside>
+  <div id="sidebar-dimmer"></div>
+
+
+      </div>
+    </main>
+
+    <footer class="footer">
+      <div class="footer-inner">
+        
+
+<div class="copyright">
+  
+  &copy; 
+  <span itemprop="copyrightYear">2020</span>
+  <span class="with-love">
+    <i class="fa fa-user"></i>
+  </span>
+  <span class="author" itemprop="copyrightHolder">Lucius</span>
+</div>
+  <div class="powered-by">Powered by <a href="https://hexo.io/" class="theme-link" rel="noopener" target="_blank">Hexo</a> v4.2.0
+  </div>
+  <span class="post-meta-divider">|</span>
+  <div class="theme-info">Theme – <a href="https://pisces.theme-next.org/" class="theme-link" rel="noopener" target="_blank">NexT.Pisces</a> v7.7.0
+  </div>
+
+        
+
+
+
+
+
+
+
+
+      </div>
+    </footer>
+  </div>
+
+  
+  <script src="/lib/anime.min.js"></script>
+  <script src="/lib/velocity/velocity.min.js"></script>
+  <script src="/lib/velocity/velocity.ui.min.js"></script>
+
+<script src="/js/utils.js"></script>
+
+<script src="/js/motion.js"></script>
+
+
+<script src="/js/schemes/pisces.js"></script>
+
+
+<script src="/js/next-boot.js"></script>
+
+
+
+
+  
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+  
+
+  
+      
+<script type="text/x-mathjax-config">
+
+  MathJax.Hub.Config({
+    tex2jax: {
+      inlineMath: [ ['$', '$'], ['\\(', '\\)'] ],
+      processEscapes: true,
+      skipTags: ['script', 'noscript', 'style', 'textarea', 'pre', 'code']
+    },
+    TeX: {
+      equationNumbers: {
+        autoNumber: 'AMS'
+      }
+    }
+  });
+
+  MathJax.Hub.Register.StartupHook('TeX Jax Ready', function() {
+    MathJax.InputJax.TeX.prefilterHooks.Add(function(data) {
+      if (data.display) {
+        var next = data.script.nextSibling;
+        while (next && next.nodeName.toLowerCase() === '#text') {
+          next = next.nextSibling;
+        }
+        if (next && next.nodeName.toLowerCase() === 'br') {
+          next.parentNode.removeChild(next);
+        }
+      }
+    });
+  });
+
+  MathJax.Hub.Queue(function() {
+    var all = MathJax.Hub.getAllJax(), i;
+    for (i = 0; i < all.length; i += 1) {
+      element = document.getElementById(all[i].inputID + '-Frame').parentNode;
+      if (element.nodeName.toLowerCase() == 'li') {
+        element = element.parentNode;
+      }
+      element.classList.add('has-jax');
+    }
+  });
+</script>
+<script>
+  NexT.utils.getScript('//cdn.jsdelivr.net/npm/mathjax@2/MathJax.js?config=TeX-AMS-MML_HTMLorMML', () => {
+    MathJax.Hub.Typeset();
+  }, window.MathJax);
+</script>
+
+    
+
+  
+
+<script>
+  function loadCount() {
+    var d = document, s = d.createElement('script');
+    s.src = 'https://Lucius.disqus.com/count.js';
+    s.id = 'dsq-count-scr';
+    (d.head || d.body).appendChild(s);
+  }
+  // defer loading until the whole page loading is completed
+  window.addEventListener('load', loadCount, false);
+</script>
+<script>
+  NexT.utils.loadComments(document.querySelector('#disqus_thread'), () => {
+    if (window.DISQUS) {
+      DISQUS.reset({
+        reload: true,
+        config: {page: {
+            url: "http://luciusssss.github.io/2020/01/28/LeetCode%E5%88%B7%E9%A2%98%E7%AC%94%E8%AE%B0-2/",
+            identifier: "2020/01/28/LeetCode刷题笔记-2/",
+            title: "LeetCode刷题笔记 2"
+          }
+        }
+      });
+    } else {
+      var d = document, s = d.createElement('script');
+      s.src = 'https://Lucius.disqus.com/embed.js';
+      s.setAttribute('data-timestamp', '' + +new Date());
+      (d.head || d.body).appendChild(s);
+    }
+  });
+</script>
+
+</body>
+</html>
